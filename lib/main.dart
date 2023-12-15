@@ -1,3 +1,4 @@
+import 'package:el_resto_app/el_resto_detail.dart';
 import 'package:el_resto_app/el_resto_list.dart';
 import 'package:el_resto_app/theme.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'El Resto App',
       theme: theme,
-      home: const ElRestoList(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const ElRestoList(),
+        '/el-resto-detail': (context) => const ElRestoDetail(),
+      },
     );
   }
 }

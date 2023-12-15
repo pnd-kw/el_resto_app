@@ -21,7 +21,7 @@ class ElRestoList extends StatelessWidget {
         width: double.infinity,
         height: screenHeight,
         decoration: BoxDecoration(
-          color: Colors.grey.shade100,
+          color: Colors.grey.shade200,
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -161,10 +161,20 @@ class ElRestoList extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
                                         children: [
-                                          // SizedBox(
-                                          //   height: screenHeight / 40,
-                                          //   child: const Icon(Icons.alarm),
-                                          // ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 5),
+                                            child: Text(
+                                              'Open Hours: ',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelSmall!
+                                                  .copyWith(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .onBackground),
+                                            ),
+                                          ),
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 5, top: 5),
@@ -186,6 +196,15 @@ class ElRestoList extends StatelessWidget {
                                 ),
                               ),
                             ),
+                            Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(context)
+                                        .pushNamed('/el-resto-detail');
+                                  },
+                                  child: const Text('Next')),
+                            )
                           ],
                         ),
                       ],
