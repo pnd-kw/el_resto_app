@@ -31,8 +31,8 @@ class ElRestoDetail extends StatelessWidget {
                       SizedBox(
                         height: screenHeight / 2,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 20, horizontal: 20),
+                          padding: const EdgeInsets.only(
+                              top: 20, left: 20, right: 20),
                           child: Stack(
                             children: [
                               Padding(
@@ -172,6 +172,186 @@ class ElRestoDetail extends StatelessWidget {
                         ),
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    height: screenHeight / 5,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image:
+                                AssetImage('assets/images/latin-food-bg.png'),
+                            fit: BoxFit.cover),
+                      ),
+                      // child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: screenHeight / 20,
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Text(
+                                'M',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge!
+                                    .copyWith(fontSize: 48)
+                                    .copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onBackground),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: screenHeight / 30,
+                            child: Align(
+                              alignment: Alignment.topCenter,
+                              child: Text(
+                                'menus',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge!
+                                    .copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onBackground),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      // ),
+                    ),
+                  ),
+
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(horizontal: 20),
+                  //   child: SizedBox(
+                  //     height: screenHeight / 5,
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //       children: [
+                  //         SizedBox(
+                  //           height: screenHeight / 60,
+                  //           child: Image.asset(
+                  //             'assets/images/line-left.png',
+                  //             fit: BoxFit.cover,
+                  //           ),
+                  //         ),
+                  //         SizedBox(
+                  //           child: Image.asset(
+                  //             'assets/images/menu-logo-center.png',
+                  //             fit: BoxFit.cover,
+                  //           ),
+                  //         ),
+                  //         SizedBox(
+                  //           height: screenHeight / 60,
+                  //           child: Image.asset(
+                  //             'assets/images/line-right.png',
+                  //             fit: BoxFit.cover,
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Container(
+                      color: Colors.white,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 20,
+                              top: 20,
+                              right: 20,
+                            ),
+                            child: Column(
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    'Argentinian-style',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge!
+                                        .copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onBackground),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    'PIZZA',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onBackground),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 20, horizontal: 20),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'NAPOLITANA',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onBackground),
+                                      ),
+                                      Text(
+                                        'IDR 150',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onBackground),
+                                      ),
+                                    ],
+                                  ),
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      'Tomatoes, oreganos, green olives',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onBackground),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),
