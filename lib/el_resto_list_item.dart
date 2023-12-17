@@ -189,15 +189,6 @@ class ElRestoListItem extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(20),
-                      //   child: ElevatedButton(
-                      //       onPressed: () {
-                      //         Navigator.of(context)
-                      //             .pushNamed('/el-resto-detail');
-                      //       },
-                      //       child: const Text('Next')),
-                      // )
                     ],
                   ),
                 ],

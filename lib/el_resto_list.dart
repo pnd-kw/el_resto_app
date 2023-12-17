@@ -7,7 +7,7 @@ class ElRestoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
+    // final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
@@ -29,12 +29,18 @@ class ElRestoList extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: ListView.builder(
             itemCount: restoList.length,
-            itemBuilder: (context, index) => ElRestoListItem(
-                name: restoList[index].name,
-                image: restoList[index].image,
-                description: restoList[index].description,
-                rating: restoList[index].rating,
-                openHours: restoList[index].openHours),
+            itemBuilder: (context, index) => InkWell(
+              onTap: () {
+                Navigator.of(context)
+                    .pushNamed('/el-resto-detail', arguments: restoList[index]);
+              },
+              child: ElRestoListItem(
+                  name: restoList[index].name,
+                  image: restoList[index].image,
+                  description: restoList[index].description,
+                  rating: restoList[index].rating,
+                  openHours: restoList[index].openHours),
+            ),
           ),
           // child: Card(
           //   elevation: 0,

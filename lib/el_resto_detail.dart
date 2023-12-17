@@ -1,3 +1,6 @@
+import 'package:el_resto_app/model/menu_category.dart';
+import 'package:el_resto_app/model/menu_category_list.dart';
+import 'package:el_resto_app/model/resto.dart';
 import 'package:flutter/material.dart';
 
 class ElRestoDetail extends StatelessWidget {
@@ -5,6 +8,12 @@ class ElRestoDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final resto = ModalRoute.of(context)!.settings.arguments as Resto;
+
+    final List<MenuCategory> filteredCategories = menuCategoryList
+        .where((category) => category.restoId == resto.id)
+        .toList();
+
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
@@ -14,11 +23,32 @@ class ElRestoDetail extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
+              leading: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Container(
+                  height: screenHeight / 30,
+                  // margin: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.grey.shade100,
+                  ),
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+              ),
               expandedHeight: screenHeight / 3,
-              pinned: false,
+              pinned: true,
               flexibleSpace: FlexibleSpaceBar(
                 background: Image.asset(
-                  'assets/images/sudestada-restaurant.jpg',
+                  resto.image,
+                  // 'assets/images/sudestada-restaurant.jpg',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -68,7 +98,8 @@ class ElRestoDetail extends StatelessWidget {
                                       padding: const EdgeInsets.only(
                                           left: 20, right: 40, bottom: 10),
                                       child: Text(
-                                        'Sudestada is regarded as an auspicious name in Argentinian culture. In Spanish, it means “powerful wind,” particularly that cool strong breeze before a mighty storm.',
+                                        resto.description,
+                                        // 'Sudestada is regarded as an auspicious name in Argentinian culture. In Spanish, it means “powerful wind,” particularly that cool strong breeze before a mighty storm.',
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodySmall!
@@ -100,7 +131,8 @@ class ElRestoDetail extends StatelessWidget {
                                       padding: const EdgeInsets.only(
                                           left: 20, right: 40, bottom: 10),
                                       child: Text(
-                                        'Has outdoor seating · Serves great cocktails · Has live music',
+                                        resto.serviceOptions,
+                                        // 'Has outdoor seating · Serves great cocktails · Has live music',
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodySmall!
@@ -132,7 +164,8 @@ class ElRestoDetail extends StatelessWidget {
                                       padding: const EdgeInsets.only(
                                           left: 20, right: 40, bottom: 10),
                                       child: Text(
-                                        'Jl. Irian No.18, RT.9/RW.5, Gondangdia, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10350',
+                                        '${resto.street}${resto.city}${resto.postalCode}',
+                                        // 'Jl. Irian No.18, RT.9/RW.5, Gondangdia, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10350',
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodySmall!
@@ -159,7 +192,8 @@ class ElRestoDetail extends StatelessWidget {
                           child: Align(
                             alignment: Alignment.center,
                             child: Text(
-                              'SUDESTADA',
+                              resto.name,
+                              // 'SUDESTADA',
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineLarge!
@@ -224,136 +258,85 @@ class ElRestoDetail extends StatelessWidget {
                       // ),
                     ),
                   ),
-
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  //   child: SizedBox(
-                  //     height: screenHeight / 5,
-                  //     child: Row(
-                  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //       children: [
-                  //         SizedBox(
-                  //           height: screenHeight / 60,
-                  //           child: Image.asset(
-                  //             'assets/images/line-left.png',
-                  //             fit: BoxFit.cover,
-                  //           ),
-                  //         ),
-                  //         SizedBox(
-                  //           child: Image.asset(
-                  //             'assets/images/menu-logo-center.png',
-                  //             fit: BoxFit.cover,
-                  //           ),
-                  //         ),
-                  //         SizedBox(
-                  //           height: screenHeight / 60,
-                  //           child: Image.asset(
-                  //             'assets/images/line-right.png',
-                  //             fit: BoxFit.cover,
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Container(
-                      color: Colors.white,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 20,
-                              top: 20,
-                              right: 20,
-                            ),
-                            child: Column(
-                              children: [
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    'Argentinian-style',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleLarge!
-                                        .copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onBackground),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    'PIZZA',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium!
-                                        .copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onBackground),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 20),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'NAPOLITANA',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium!
-                                            .copyWith(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onBackground),
-                                      ),
-                                      Text(
-                                        'IDR 150',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium!
-                                            .copyWith(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onBackground),
-                                      ),
-                                    ],
-                                  ),
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      'Tomatoes, oreganos, green olives',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall!
-                                          .copyWith(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .onBackground),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
                 ],
+              ),
+            ),
+            SliverList.builder(
+              itemCount: filteredCategories.length,
+              itemBuilder: (context, catIndex) => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Container(
+                  color: Colors.white,
+                  child: Column(
+                    children: [
+                      Text(
+                        filteredCategories[catIndex].title,
+                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            color: Theme.of(context).colorScheme.onBackground),
+                      ),
+                      Text(
+                        filteredCategories[catIndex].subtitle ?? '',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground),
+                      ),
+                      Column(
+                        children: List.generate(
+                            filteredCategories[catIndex].menuItems.length,
+                            (menuIndex) {
+                          final menuItem =
+                              filteredCategories[catIndex].menuItems[menuIndex];
+                          return ListTile(
+                            title: Text(
+                              menuItem.name,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground),
+                            ),
+                            subtitle: Text(
+                              menuItem.description ?? '',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground),
+                            ),
+                            trailing: Text(
+                              menuItem.price.toString(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground),
+                            ),
+                          );
+                        }),
+                      )
+                    ],
+                    // child: ListView.builder(
+                    //   itemCount: menuCategoryList.length,
+                    //   itemBuilder: (context, index) => SizedBox(
+                    //     child: Column(
+                    //       children: [
+                    //         Text(menuCategoryList[index].title),
+                    //         Text(menuCategoryList[index].subtitle ?? ''),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
+                  ),
+                ),
               ),
             ),
           ],

@@ -1,7 +1,7 @@
-import 'package:el_resto_app/model/menu_category_list.dart';
+// import 'package:el_resto_app/model/menu_category_list.dart';
 import 'package:el_resto_app/model/resto.dart';
 
-final restoList = [
+const restoList = [
   Resto(
     id: '1',
     name: 'SUDESTADA',
@@ -16,10 +16,7 @@ final restoList = [
     postalCode: '10350',
     rating: 4.7,
     openHours: '11 AM - 10 PM',
-    menuCategories: [
-      menuCategory1,
-      menuCategory2,
-    ],
+    // menuCategories: menuCategory,
   ),
   Resto(
     id: '2',
@@ -34,8 +31,6 @@ final restoList = [
     postalCode: '17230',
     rating: 4.5,
     openHours: '12-11 PM',
-    menuCategories: [
-      menuCategory3,
-    ],
+    // menuCategories: menuCategory,
   ),
 ];

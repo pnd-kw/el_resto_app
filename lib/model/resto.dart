@@ -1,4 +1,4 @@
-import 'package:el_resto_app/model/menu_category.dart';
+// import 'package:el_resto_app/model/menu_category.dart';
 
 class Resto {
   final String id;
@@ -11,7 +11,7 @@ class Resto {
   final String postalCode;
   final double rating;
   final String openHours;
-  final List<List<MenuCategory>> menuCategories;
+  // final List<MenuCategory> menuCategories;
 
   const Resto({
     required this.id,
@@ -24,6 +24,6 @@ class Resto {
     required this.postalCode,
     required this.rating,
     required this.openHours,
-    required this.menuCategories,
+    // required this.menuCategories,
   });
 }

@@ -1,12 +1,12 @@
 import 'package:el_resto_app/model/menu.dart';
 import 'package:el_resto_app/model/menu_category.dart';
 
-final menuCategory1 = [
+final menuCategoryList = [
   MenuCategory(
     id: '1',
     restoId: '1',
     title: 'Argentinian-style',
-    subtitle: 'pizza',
+    subtitle: 'PIZZA',
     menuItems: [
       Menu(
           id: '1',
@@ -58,39 +58,79 @@ final menuCategory1 = [
           price: 265),
     ],
   ),
+  MenuCategory(
+    id: '2',
+    restoId: '1',
+    title: 'Empanadas',
+    menuItems: [
+      Menu(id: '9', menuCategoryId: '2', name: 'HAM & MOZZARELA', price: 55),
+      Menu(id: '10', menuCategoryId: '2', name: 'HAND-CUT BEEF', price: 55),
+      Menu(id: '11', menuCategoryId: '2', name: 'SPINACH & RICOTTA', price: 55),
+      Menu(
+          id: '12', menuCategoryId: '2', name: 'EMPANADAS PLATTER', price: 140),
+    ],
+  ),
+  MenuCategory(
+    id: '13',
+    restoId: '2',
+    title: 'Main Course',
+    menuItems: [
+      Menu(
+          id: '13',
+          menuCategoryId: '3',
+          name: 'CANELONES DE VERDURA',
+          description:
+              'Rolled savory crepes, filled with sauteed creamy cheesy spinach, tomatoes, onion, olives, garlic, and herbs, served with a mixture of Bechamel and tomato sauce.',
+          price: 91),
+      Menu(
+          id: '14',
+          menuCategoryId: '3',
+          name: 'CANELONES DE CARNE',
+          description:
+              'Rolled savory crepes, filled with minced beef, onion, boiled egg, olives, garlic, capsicum, and herbs, served with a mixture of Bechamel and tomato sauce.',
+          price: 110),
+      Menu(
+          id: '15',
+          menuCategoryId: '3',
+          name: 'MILANESA DE POLLO',
+          description:
+              'Juicy marinated chicken breast cooked schnitzel-style, coated with breadcrumbs, served with beef ham, and topped with mozarella cheese, tomato paste, and green peas. Choose one side dish : Russian salad or Seasoned French Fries',
+          price: 110),
+    ],
+  ),
 ];
 
-final menuCategory2 = [
-  MenuCategory(id: '2', restoId: '1', title: 'Empanadas', menuItems: [
-    Menu(id: '9', menuCategoryId: '2', name: 'HAM & MOZZARELA', price: 55),
-    Menu(id: '10', menuCategoryId: '2', name: 'HAND-CUT BEEF', price: 55),
-    Menu(id: '11', menuCategoryId: '2', name: 'SPINACH & RICOTTA', price: 55),
-    Menu(id: '12', menuCategoryId: '2', name: 'EMPANADAS PLATTER', price: 140),
-  ])
-];
+// final menuCategory2 = [
+//   MenuCategory(id: '2', restoId: '1', title: 'Empanadas', menuItems: [
+//     Menu(id: '9', menuCategoryId: '2', name: 'HAM & MOZZARELA', price: 55),
+//     Menu(id: '10', menuCategoryId: '2', name: 'HAND-CUT BEEF', price: 55),
+//     Menu(id: '11', menuCategoryId: '2', name: 'SPINACH & RICOTTA', price: 55),
+//     Menu(id: '12', menuCategoryId: '2', name: 'EMPANADAS PLATTER', price: 140),
+//   ])
+// ];
 
-final menuCategory3 = [
-  MenuCategory(id: '13', restoId: '2', title: 'Main Course', menuItems: [
-    Menu(
-        id: '13',
-        menuCategoryId: '3',
-        name: 'CANELONES DE VERDURA',
-        description:
-            'Rolled savory crepes, filled with sauteed creamy cheesy spinach, tomatoes, onion, olives, garlic, and herbs, served with a mixture of Bechamel and tomato sauce.',
-        price: 91),
-    Menu(
-        id: '14',
-        menuCategoryId: '3',
-        name: 'CANELONES DE CARNE',
-        description:
-            'Rolled savory crepes, filled with minced beef, onion, boiled egg, olives, garlic, capsicum, and herbs, served with a mixture of Bechamel and tomato sauce.',
-        price: 110),
-    Menu(
-        id: '15',
-        menuCategoryId: '3',
-        name: 'MILANESA DE POLLO',
-        description:
-            'Juicy marinated chicken breast cooked schnitzel-style, coated with breadcrumbs, served with beef ham, and topped with mozarella cheese, tomato paste, and green peas. Choose one side dish : Russian salad or Seasoned French Fries',
-        price: 110),
-  ])
-];
+// final menuCategory3 = [
+//   MenuCategory(id: '13', restoId: '2', title: 'Main Course', menuItems: [
+//     Menu(
+//         id: '13',
+//         menuCategoryId: '3',
+//         name: 'CANELONES DE VERDURA',
+//         description:
+//             'Rolled savory crepes, filled with sauteed creamy cheesy spinach, tomatoes, onion, olives, garlic, and herbs, served with a mixture of Bechamel and tomato sauce.',
+//         price: 91),
+//     Menu(
+//         id: '14',
+//         menuCategoryId: '3',
+//         name: 'CANELONES DE CARNE',
+//         description:
+//             'Rolled savory crepes, filled with minced beef, onion, boiled egg, olives, garlic, capsicum, and herbs, served with a mixture of Bechamel and tomato sauce.',
+//         price: 110),
+//     Menu(
+//         id: '15',
+//         menuCategoryId: '3',
+//         name: 'MILANESA DE POLLO',
+//         description:
+//             'Juicy marinated chicken breast cooked schnitzel-style, coated with breadcrumbs, served with beef ham, and topped with mozarella cheese, tomato paste, and green peas. Choose one side dish : Russian salad or Seasoned French Fries',
+//         price: 110),
+//   ])
+// ];
