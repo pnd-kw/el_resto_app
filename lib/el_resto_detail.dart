@@ -1,6 +1,9 @@
-import 'package:el_resto_app/model/menu_category.dart';
+// import 'package:el_resto_app/model/menu_category.dart';
+import 'package:el_resto_app/model/menu.dart';
 import 'package:el_resto_app/model/menu_category_list.dart';
+import 'package:el_resto_app/model/menu_list.dart';
 import 'package:el_resto_app/model/resto.dart';
+import 'package:el_resto_app/model/resto_menu_category_list.dart';
 import 'package:flutter/material.dart';
 
 class ElRestoDetail extends StatelessWidget {
@@ -9,10 +12,43 @@ class ElRestoDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final resto = ModalRoute.of(context)!.settings.arguments as Resto;
+    // final Map<String, List<Menu>> menuItemsByCategory = {};
+    Map<String, Map<String, List<Menu>>> menuItemsByRestoAndCategory = {};
 
-    final List<MenuCategory> filteredCategories = menuCategoryList
-        .where((category) => category.restoId == resto.id)
+    final restoMenuCategories = menuCategoryList
+        .where((category) => restoMenuCategoryList.any((relation) =>
+            relation.restoId == resto.restoId &&
+            relation.menuCategoryId == category.menuCategoryId))
         .toList();
+
+    for (var restoMenuCategory in restoMenuCategoryList) {
+      final menu = menuList.where((menu) =>
+          menu.restoId == restoMenuCategory.restoId &&
+          menu.menuCategoryId == restoMenuCategory.menuCategoryId);
+
+      if (!menuItemsByRestoAndCategory.containsKey(restoMenuCategory.restoId)) {
+        menuItemsByRestoAndCategory[restoMenuCategory.restoId] = {};
+      }
+
+      if (!menuItemsByRestoAndCategory[restoMenuCategory.restoId]!
+          .containsKey(restoMenuCategory.menuCategoryId)) {
+        menuItemsByRestoAndCategory[restoMenuCategory.restoId]![
+            restoMenuCategory.menuCategoryId] = [];
+      }
+
+      menuItemsByRestoAndCategory[restoMenuCategory.restoId]![
+              restoMenuCategory.menuCategoryId]!
+          .addAll(menu);
+    }
+    // for (var category in restoMenuCategories) {
+    //   final restoMenuItems = menuList
+    //       .where((menu) =>
+    //           menu.restoId == resto.restoId &&
+    //           menu.menuCategoryId == category.menuCategoryId)
+    //       .toList();
+
+    //   menuItemsByCategory[category.title] = restoMenuItems;
+    // }
 
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
@@ -27,7 +63,6 @@ class ElRestoDetail extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 10),
                 child: Container(
                   height: screenHeight / 30,
-                  // margin: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.grey.shade100,
@@ -48,7 +83,6 @@ class ElRestoDetail extends StatelessWidget {
               flexibleSpace: FlexibleSpaceBar(
                 background: Image.asset(
                   resto.image,
-                  // 'assets/images/sudestada-restaurant.jpg',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -99,7 +133,6 @@ class ElRestoDetail extends StatelessWidget {
                                           left: 20, right: 40, bottom: 10),
                                       child: Text(
                                         resto.description,
-                                        // 'Sudestada is regarded as an auspicious name in Argentinian culture. In Spanish, it means “powerful wind,” particularly that cool strong breeze before a mighty storm.',
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodySmall!
@@ -132,7 +165,6 @@ class ElRestoDetail extends StatelessWidget {
                                           left: 20, right: 40, bottom: 10),
                                       child: Text(
                                         resto.serviceOptions,
-                                        // 'Has outdoor seating · Serves great cocktails · Has live music',
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodySmall!
@@ -164,8 +196,11 @@ class ElRestoDetail extends StatelessWidget {
                                       padding: const EdgeInsets.only(
                                           left: 20, right: 40, bottom: 10),
                                       child: Text(
-                                        '${resto.street}${resto.city}${resto.postalCode}',
-                                        // 'Jl. Irian No.18, RT.9/RW.5, Gondangdia, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10350',
+                                        [
+                                          resto.street,
+                                          resto.city,
+                                          resto.postalCode
+                                        ].join(' '),
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodySmall!
@@ -193,7 +228,6 @@ class ElRestoDetail extends StatelessWidget {
                             alignment: Alignment.center,
                             child: Text(
                               resto.name,
-                              // 'SUDESTADA',
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineLarge!
@@ -216,7 +250,6 @@ class ElRestoDetail extends StatelessWidget {
                                 AssetImage('assets/images/latin-food-bg.png'),
                             fit: BoxFit.cover),
                       ),
-                      // child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -255,89 +288,113 @@ class ElRestoDetail extends StatelessWidget {
                           ),
                         ],
                       ),
-                      // ),
                     ),
                   ),
                 ],
               ),
             ),
             SliverList.builder(
-              itemCount: filteredCategories.length,
-              itemBuilder: (context, catIndex) => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Container(
-                  color: Colors.white,
-                  child: Column(
-                    children: [
-                      Text(
-                        filteredCategories[catIndex].title,
-                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                            color: Theme.of(context).colorScheme.onBackground),
-                      ),
-                      Text(
-                        filteredCategories[catIndex].subtitle ?? '',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .copyWith(
-                                color:
-                                    Theme.of(context).colorScheme.onBackground),
-                      ),
-                      Column(
-                        children: List.generate(
-                            filteredCategories[catIndex].menuItems.length,
-                            (menuIndex) {
-                          final menuItem =
-                              filteredCategories[catIndex].menuItems[menuIndex];
-                          return ListTile(
-                            title: Text(
-                              menuItem.name,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground),
-                            ),
-                            subtitle: Text(
-                              menuItem.description ?? '',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall!
-                                  .copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground),
-                            ),
-                            trailing: Text(
-                              menuItem.price.toString(),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground),
-                            ),
-                          );
-                        }),
-                      )
-                    ],
-                    // child: ListView.builder(
-                    //   itemCount: menuCategoryList.length,
-                    //   itemBuilder: (context, index) => SizedBox(
-                    //     child: Column(
-                    //       children: [
-                    //         Text(menuCategoryList[index].title),
-                    //         Text(menuCategoryList[index].subtitle ?? ''),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
+              itemCount: restoMenuCategories.length,
+              itemBuilder: (context, catIndex) {
+                final category = restoMenuCategories[catIndex];
+                // final menuItems = menuItemsByCategory[category.menuCategoryId];
+                final menuItems = menuItemsByRestoAndCategory[resto.restoId]
+                    ?[category.menuCategoryId];
+
+                return Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  child: Container(
+                    color: Colors.white,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Text(
+                            category.title,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge!
+                                .copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground),
+                          ),
+                        ),
+                        Text(
+                          category.subtitle ?? '',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground),
+                        ),
+                        Column(
+                          // children: List.generate(
+                          //     filteredCategories[catIndex].menuItems.length, (index) {
+                          //   final menuItem =
+                          //       filteredCategories[catIndex].menuItems[menuIndex];
+                          children: menuItems!.map((menuItem) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 10),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        menuItem.name,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onBackground),
+                                      ),
+                                      Text(
+                                        'IDR ${menuItem.price.toString()}',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onBackground),
+                                      ),
+                                    ],
+                                  ),
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: SizedBox(
+                                      width: screenWidth / 2,
+                                      child: Text(
+                                        menuItem.description ?? '',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onBackground),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                          // }),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ],
         ),

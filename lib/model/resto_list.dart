@@ -1,9 +1,8 @@
-// import 'package:el_resto_app/model/menu_category_list.dart';
 import 'package:el_resto_app/model/resto.dart';
 
 const restoList = [
   Resto(
-    id: '1',
+    restoId: '1',
     name: 'SUDESTADA',
     image: 'assets/images/sudestada-restaurant.jpg',
     description:
@@ -16,10 +15,9 @@ const restoList = [
     postalCode: '10350',
     rating: 4.7,
     openHours: '11 AM - 10 PM',
-    // menuCategories: menuCategory,
   ),
   Resto(
-    id: '2',
+    restoId: '2',
     name: 'EL ASADOR',
     image: 'assets/images/el-asador.jpg',
     description:
@@ -31,6 +29,5 @@ const restoList = [
     postalCode: '17230',
     rating: 4.5,
     openHours: '12-11 PM',
-    // menuCategories: menuCategory,
   ),
 ];
