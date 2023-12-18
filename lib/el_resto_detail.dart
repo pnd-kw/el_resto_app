@@ -12,43 +12,43 @@ class ElRestoDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final resto = ModalRoute.of(context)!.settings.arguments as Resto;
-    // final Map<String, List<Menu>> menuItemsByCategory = {};
+    // Menginisialisasi Map dengan key value pair pertama berupa <restoId(String) berpasangan dengan <Map yang berisi key value pair berupa <menuCategoryId(String) berpasangan dengan List<Menu>>>
     Map<String, Map<String, List<Menu>>> menuItemsByRestoAndCategory = {};
 
+    // Filter Menu Categories yang sesuai dengan Restoran tertentu
     final restoMenuCategories = menuCategoryList
         .where((category) => restoMenuCategoryList.any((relation) =>
             relation.restoId == resto.restoId &&
             relation.menuCategoryId == category.menuCategoryId))
         .toList();
 
+    // Iterasi dilakukan pada setiap item dalam `restoMenuCategoryList`(daftar relasi antara restoran dan kategori menu), perulangan digunakan untuk mencari `Menu` yang memiliki `restoId` dan `menuCategoryId` yang sesuai dengan restoran yang dipilih oleh user dari seluruh list restoran
     for (var restoMenuCategory in restoMenuCategoryList) {
       final menu = menuList.where((menu) =>
           menu.restoId == restoMenuCategory.restoId &&
           menu.menuCategoryId == restoMenuCategory.menuCategoryId);
 
+      // Memeriksa apakah `menuItemsByRestoAndCategory` sudah memiliki entri untuk restoran yang sesuai (`restoId`), jika belum maka buat entri baru dengan inisialisasi empty Map {}
       if (!menuItemsByRestoAndCategory.containsKey(restoMenuCategory.restoId)) {
         menuItemsByRestoAndCategory[restoMenuCategory.restoId] = {};
       }
 
+      // Memeriksa apakah dalam Map yang terkait dengan `restoId` tertentu sudah ada entri untuk `menuCategoryId`, jika belum maka buat entri baru dengan inisialisasi empty array []
       if (!menuItemsByRestoAndCategory[restoMenuCategory.restoId]!
           .containsKey(restoMenuCategory.menuCategoryId)) {
         menuItemsByRestoAndCategory[restoMenuCategory.restoId]![
             restoMenuCategory.menuCategoryId] = [];
       }
 
+      // Menambahkan menu ke dalam Map yang sesuai
+      // Map<String, List<String>> restoMenuCategory = {
+      //  '1': ['1', '2'],
+      //  '2': ['3'],
+      //  ....dst };
       menuItemsByRestoAndCategory[restoMenuCategory.restoId]![
               restoMenuCategory.menuCategoryId]!
           .addAll(menu);
     }
-    // for (var category in restoMenuCategories) {
-    //   final restoMenuItems = menuList
-    //       .where((menu) =>
-    //           menu.restoId == resto.restoId &&
-    //           menu.menuCategoryId == category.menuCategoryId)
-    //       .toList();
-
-    //   menuItemsByCategory[category.title] = restoMenuItems;
-    // }
 
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
@@ -297,7 +297,6 @@ class ElRestoDetail extends StatelessWidget {
               itemCount: restoMenuCategories.length,
               itemBuilder: (context, catIndex) {
                 final category = restoMenuCategories[catIndex];
-                // final menuItems = menuItemsByCategory[category.menuCategoryId];
                 final menuItems = menuItemsByRestoAndCategory[resto.restoId]
                     ?[category.menuCategoryId];
 
@@ -332,10 +331,6 @@ class ElRestoDetail extends StatelessWidget {
                                       .onBackground),
                         ),
                         Column(
-                          // children: List.generate(
-                          //     filteredCategories[catIndex].menuItems.length, (index) {
-                          //   final menuItem =
-                          //       filteredCategories[catIndex].menuItems[menuIndex];
                           children: menuItems!.map((menuItem) {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
@@ -388,7 +383,6 @@ class ElRestoDetail extends StatelessWidget {
                               ),
                             );
                           }).toList(),
-                          // }),
                         ),
                       ],
                     ),

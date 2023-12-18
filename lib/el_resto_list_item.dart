@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class ElRestoListItem extends StatelessWidget {
@@ -135,7 +136,7 @@ class ElRestoListItem extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 10, horizontal: 10),
-                                child: Text(
+                                child: AutoSizeText(
                                   description,
                                   style: Theme.of(context)
                                       .textTheme
@@ -145,6 +146,7 @@ class ElRestoListItem extends StatelessWidget {
                                               .colorScheme
                                               .onBackground),
                                   textAlign: TextAlign.justify,
+                                  minFontSize: 9,
                                   maxLines: 4,
                                   overflow: TextOverflow.ellipsis,
                                 ),
