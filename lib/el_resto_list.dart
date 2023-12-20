@@ -1,4 +1,4 @@
-import 'package:el_resto_app/el_resto_list_item.dart';
+import 'package:el_resto_app/widget/el_resto_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:el_resto_app/model/resto_list.dart';
 
