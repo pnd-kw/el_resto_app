@@ -34,7 +34,6 @@ final TextTheme textTheme = TextTheme(
     ));
 
 final theme = ThemeData().copyWith(
-  useMaterial3: true,
   colorScheme: colorScheme,
   textTheme: textTheme,
 );

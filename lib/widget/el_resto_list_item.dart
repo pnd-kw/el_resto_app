@@ -24,7 +24,7 @@ class ElRestoListItem extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
     final mobileCardHeight = screenHeight / 1.8;
     final mobileImgHeight = screenHeight / 3.5;
-    final mobileTextBoxHeight = screenHeight / 6;
+    final mobileTextBoxHeight = screenHeight / 5;
     final mobileTitleHeight = screenHeight / 12;
     final mobileStarIconHeight = screenHeight / 30;
 
@@ -136,82 +136,91 @@ class ElRestoListItem extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                          height: starIconHeight,
-                                          child: const Align(
-                                              alignment: Alignment.center,
-                                              child: Icon(Icons.star_border))),
-                                      Text(
-                                        rating.toString(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium!
-                                            .copyWith(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onBackground),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  child: AutoSizeText(
-                                    description,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall!
-                                        .copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onBackground),
-                                    textAlign: TextAlign.justify,
-                                    minFontSize: 9,
-                                    maxLines: 4,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 5),
-                                        child: Text(
-                                          'Open Hours: ',
+                                Flexible(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                            height: starIconHeight,
+                                            child: const Align(
+                                                alignment: Alignment.center,
+                                                child:
+                                                    Icon(Icons.star_border))),
+                                        Text(
+                                          rating.toString(),
                                           style: Theme.of(context)
                                               .textTheme
-                                              .labelSmall!
+                                              .bodyMedium!
                                               .copyWith(
                                                   color: Theme.of(context)
                                                       .colorScheme
                                                       .onBackground),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 5, top: 5),
-                                        child: Text(
-                                          openHours,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelSmall!
-                                              .copyWith(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .onBackground),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: AutoSizeText(
+                                      description,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onBackground),
+                                      textAlign: TextAlign.justify,
+                                      minFontSize: 9,
+                                      maxLines: 4,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+                                Flexible(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 5),
+                                          child: Text(
+                                            'Open Hours: ',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelSmall!
+                                                .copyWith(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .onBackground),
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 5, top: 5),
+                                          child: Text(
+                                            openHours,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelSmall!
+                                                .copyWith(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .onBackground),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ],

@@ -103,9 +103,12 @@ class ElRestoDetail extends StatelessWidget {
               expandedHeight: expandedHeight,
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
-                background: Image.asset(
-                  resto.image,
-                  fit: BoxFit.cover,
+                background: AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: Image.asset(
+                    resto.image,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -118,157 +121,6 @@ class ElRestoDetail extends StatelessWidget {
                       serviceOptions: resto.serviceOptions,
                       address: [resto.street, resto.city, resto.postalCode]
                           .join(' ')),
-                  // Stack(
-                  //   children: [
-                  //     SizedBox(
-                  //       height: screenHeight / 2,
-                  //       child: Padding(
-                  //         padding: const EdgeInsets.only(
-                  //             top: 20, left: 20, right: 20),
-                  //         child: Stack(
-                  //           children: [
-                  //             Padding(
-                  //               padding: const EdgeInsets.only(top: 5, left: 5),
-                  //               child: Container(
-                  //                 decoration: BoxDecoration(
-                  //                   color: Colors.white,
-                  //                   borderRadius: const BorderRadius.only(
-                  //                     topLeft: Radius.circular(20),
-                  //                     bottomRight: Radius.circular(20),
-                  //                   ),
-                  //                   border: Border.all(width: 1.0),
-                  //                 ),
-                  //               ),
-                  //             ),
-                  //             Padding(
-                  //               padding:
-                  //                   const EdgeInsets.only(right: 5, bottom: 5),
-                  //               child: Container(
-                  //                 decoration: const BoxDecoration(
-                  //                   color: Colors.black,
-                  //                   borderRadius: BorderRadius.only(
-                  //                       topLeft: Radius.circular(20),
-                  //                       bottomRight: Radius.circular(20)),
-                  //                 ),
-                  //               ),
-                  //             ),
-                  //             Padding(
-                  //               padding: const EdgeInsets.only(top: 100),
-                  //               child: Column(
-                  //                 children: [
-                  //                   Padding(
-                  //                     padding: const EdgeInsets.only(
-                  //                         left: 20, right: 40, bottom: 10),
-                  //                     child: Text(
-                  //                       resto.description,
-                  //                       style: Theme.of(context)
-                  //                           .textTheme
-                  //                           .bodySmall!
-                  //                           .copyWith(
-                  //                               color: Theme.of(context)
-                  //                                   .colorScheme
-                  //                                   .background),
-                  //                       textAlign: TextAlign.justify,
-                  //                     ),
-                  //                   ),
-                  //                   Padding(
-                  //                     padding: const EdgeInsets.only(
-                  //                         left: 20, right: 40, bottom: 10),
-                  //                     child: Align(
-                  //                       alignment: Alignment.centerLeft,
-                  //                       child: Text(
-                  //                         'Service Options : ',
-                  //                         style: Theme.of(context)
-                  //                             .textTheme
-                  //                             .labelSmall!
-                  //                             .copyWith(
-                  //                                 color: Theme.of(context)
-                  //                                     .colorScheme
-                  //                                     .background),
-                  //                       ),
-                  //                     ),
-                  //                   ),
-                  //                   Padding(
-                  //                     padding: const EdgeInsets.only(
-                  //                         left: 20, right: 40, bottom: 10),
-                  //                     child: Text(
-                  //                       resto.serviceOptions,
-                  //                       style: Theme.of(context)
-                  //                           .textTheme
-                  //                           .bodySmall!
-                  //                           .copyWith(
-                  //                               color: Theme.of(context)
-                  //                                   .colorScheme
-                  //                                   .background),
-                  //                       textAlign: TextAlign.justify,
-                  //                     ),
-                  //                   ),
-                  //                   Padding(
-                  //                     padding: const EdgeInsets.only(
-                  //                         left: 20, right: 40, bottom: 10),
-                  //                     child: Align(
-                  //                       alignment: Alignment.centerLeft,
-                  //                       child: Text(
-                  //                         'Address : ',
-                  //                         style: Theme.of(context)
-                  //                             .textTheme
-                  //                             .labelSmall!
-                  //                             .copyWith(
-                  //                                 color: Theme.of(context)
-                  //                                     .colorScheme
-                  //                                     .background),
-                  //                       ),
-                  //                     ),
-                  //                   ),
-                  //                   Padding(
-                  //                     padding: const EdgeInsets.only(
-                  //                         left: 20, right: 40, bottom: 10),
-                  //                     child: Text(
-                  //                       [
-                  //                         resto.street,
-                  //                         resto.city,
-                  //                         resto.postalCode
-                  //                       ].join(' '),
-                  //                       style: Theme.of(context)
-                  //                           .textTheme
-                  //                           .bodySmall!
-                  //                           .copyWith(
-                  //                               color: Theme.of(context)
-                  //                                   .colorScheme
-                  //                                   .background),
-                  //                       textAlign: TextAlign.justify,
-                  //                     ),
-                  //                   ),
-                  //                 ],
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     Padding(
-                  //       padding: const EdgeInsets.only(top: 50),
-                  //       child: Container(
-                  //         width: screenWidth / 2,
-                  //         height: screenHeight / 15,
-                  //         color: Colors.white,
-                  //         child: Align(
-                  //           alignment: Alignment.center,
-                  //           child: Text(
-                  //             resto.name,
-                  //             style: Theme.of(context)
-                  //                 .textTheme
-                  //                 .headlineLarge!
-                  //                 .copyWith(
-                  //                     color: Theme.of(context)
-                  //                         .colorScheme
-                  //                         .onBackground),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
                   SizedBox(
                     height: menuBgImage,
                     child: Container(

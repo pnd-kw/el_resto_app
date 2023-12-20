@@ -63,82 +63,91 @@ class ElRestoDetailInfo extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.only(top: 50),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 40, bottom: 10),
-                        child: Text(
-                          description,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall!
-                              .copyWith(
-                                  color:
-                                      Theme.of(context).colorScheme.background),
-                          textAlign: TextAlign.justify,
+                      Flexible(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, bottom: 10),
+                          child: Text(
+                            description,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall!
+                                .copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .background),
+                            textAlign: TextAlign.justify,
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 40, bottom: 10),
-                        // child: Align(
-                        //   alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Service Options : ',
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelSmall!
-                              .copyWith(
-                                  color:
-                                      Theme.of(context).colorScheme.background),
-                        ),
-                        // ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 40, bottom: 10),
-                        child: Text(
-                          serviceOptions,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall!
-                              .copyWith(
-                                  color:
-                                      Theme.of(context).colorScheme.background),
-                          textAlign: TextAlign.justify,
+                      Flexible(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, bottom: 10),
+                          child: Text(
+                            'Service Options : ',
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall!
+                                .copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .background),
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 40, bottom: 10),
-                        // child: Align(
-                        //   alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Address : ',
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelSmall!
-                              .copyWith(
-                                  color:
-                                      Theme.of(context).colorScheme.background),
+                      Flexible(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, bottom: 10),
+                          child: Text(
+                            serviceOptions,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall!
+                                .copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .background),
+                            textAlign: TextAlign.justify,
+                          ),
                         ),
-                        // ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 40, bottom: 10),
-                        child: Text(
-                          address,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall!
-                              .copyWith(
-                                  color:
-                                      Theme.of(context).colorScheme.background),
-                          textAlign: TextAlign.justify,
+                      Flexible(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, bottom: 10),
+                          child: Text(
+                            'Address : ',
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall!
+                                .copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .background),
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, bottom: 10),
+                          child: Text(
+                            address,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall!
+                                .copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .background),
+                            textAlign: TextAlign.justify,
+                          ),
                         ),
                       ),
                     ],
