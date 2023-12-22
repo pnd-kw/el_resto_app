@@ -108,31 +108,17 @@ class ElRestoListItem extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 25, top: 25, right: 15, bottom: 15),
-                          child: Container(
+                          child: buildTextBox(
                             height: bgTextBoxHeight,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: const BorderRadius.only(
-                                bottomLeft: Radius.circular(20),
-                                bottomRight: Radius.circular(20),
-                              ),
-                              border: Border.all(width: 1.0),
-                            ),
+                            color: Colors.white,
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 20, horizontal: 20),
-                          child: Container(
+                          child: buildTextBox(
                             height: textBoxHeight,
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade300,
-                              borderRadius: const BorderRadius.only(
-                                bottomLeft: Radius.circular(20),
-                                bottomRight: Radius.circular(20),
-                              ),
-                              border: Border.all(width: 1.0),
-                            ),
+                            color: Colors.grey.shade300,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -261,3 +247,18 @@ class ElRestoListItem extends StatelessWidget {
     );
   }
 }
+
+Widget buildTextBox(
+        {required double height, required Color color, Widget? child}) =>
+    Container(
+      height: height,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: const BorderRadius.only(
+          bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20),
+        ),
+        border: Border.all(width: 1.0),
+      ),
+      child: child,
+    );

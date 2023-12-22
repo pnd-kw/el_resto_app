@@ -1,5 +1,3 @@
-// import 'package:el_resto_app/model/menu_category.dart';
-// import 'package:el_resto_app/menu_list.dart';
 import 'package:el_resto_app/widget/el_resto_detail_info.dart';
 import 'package:el_resto_app/widget/menu_item.dart';
 import 'package:el_resto_app/widget/menu_category.dart';
@@ -55,7 +53,6 @@ class ElRestoDetail extends StatelessWidget {
           .addAll(menu);
     }
 
-    // final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
     final mobileExpandedHeight = screenHeight / 3;
@@ -116,11 +113,13 @@ class ElRestoDetail extends StatelessWidget {
               delegate: SliverChildListDelegate(
                 [
                   ElRestoDetailInfo(
-                      name: resto.name,
-                      description: resto.description,
-                      serviceOptions: resto.serviceOptions,
-                      address: [resto.street, resto.city, resto.postalCode]
-                          .join(' ')),
+                    name: resto.name,
+                    description: resto.description,
+                    serviceOptions: resto.serviceOptions,
+                    address:
+                        [resto.street, resto.city, resto.postalCode].join(' '),
+                    openHours: resto.openHours,
+                  ),
                   SizedBox(
                     height: menuBgImage,
                     child: Container(
