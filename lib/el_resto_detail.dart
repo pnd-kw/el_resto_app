@@ -114,6 +114,7 @@ class ElRestoDetail extends StatelessWidget {
                 [
                   ElRestoDetailInfo(
                     name: resto.name,
+                    rating: resto.rating,
                     description: resto.description,
                     serviceOptions: resto.serviceOptions,
                     address:
