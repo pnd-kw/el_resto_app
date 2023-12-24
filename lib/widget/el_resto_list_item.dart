@@ -4,46 +4,52 @@ import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class ElRestoListItem extends StatelessWidget {
   final String name;
-  final String image;
   final String description;
+  final String image;
+  final String city;
   final double rating;
-  final String openHours;
 
   const ElRestoListItem({
     super.key,
     required this.name,
-    required this.image,
     required this.description,
+    required this.image,
+    required this.city,
     required this.rating,
-    required this.openHours,
   });
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    final mobileCardHeight = screenHeight / 1.8;
-    final mobileImgHeight = screenHeight / 3.5;
-    final mobileTextBoxHeight = screenHeight / 5;
+    final mobileCardHeight = screenHeight / 2;
+    // final mobileImgHeight = screenHeight / 3;
+    final mobileTextBoxHeight = screenHeight / 6;
     final mobileTitleHeight = screenHeight / 12;
-    final mobileStarIconHeight = screenHeight / 30;
+    final mobileIconContainerHeight = screenHeight / 30;
+    final mobileStarIconHeight = screenHeight / 50;
+    final mobilePinIconHeight = screenHeight / 30;
 
     double cardHeight = screenHeight * 1.25;
-    double bgImgHeight = screenHeight;
-    double restoImageHeight = screenHeight;
+    // double bgImgHeight = screenHeight;
+    // double restoImageHeight = screenHeight;
     double bgTextBoxHeight = screenHeight / 3;
     double textBoxHeight = screenHeight / 3;
     double titleHeight = screenHeight / 5;
-    double starIconHeight = screenHeight / 10;
+    double iconContainerHeight = screenHeight / 10;
+    double starIconHeight = screenHeight / 15;
+    double pinIconHeight = screenHeight / 10;
 
     if (ResponsiveBreakpoints.of(context).smallerOrEqualTo(MOBILE)) {
       cardHeight = mobileCardHeight;
-      bgImgHeight = mobileImgHeight;
-      restoImageHeight = mobileImgHeight;
+      // bgImgHeight = mobileImgHeight;
+      // restoImageHeight = mobileImgHeight;
       bgTextBoxHeight = mobileTextBoxHeight;
       textBoxHeight = mobileTextBoxHeight;
       titleHeight = mobileTitleHeight;
+      iconContainerHeight = mobileIconContainerHeight;
       starIconHeight = mobileStarIconHeight;
+      pinIconHeight = mobilePinIconHeight;
     }
 
     return Card(
@@ -66,7 +72,7 @@ class ElRestoListItem extends StatelessWidget {
                       child: Stack(
                         children: [
                           Container(
-                            height: bgImgHeight,
+                            // height: bgImgHeight,
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
                                 colors: [
@@ -85,10 +91,10 @@ class ElRestoListItem extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(top: 5),
                             child: Container(
-                              height: restoImageHeight,
+                              // height: restoImageHeight,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage(image),
+                                  image: NetworkImage(image),
                                   fit: BoxFit.cover,
                                 ),
                                 borderRadius: const BorderRadius.only(
@@ -130,21 +136,91 @@ class ElRestoListItem extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                        SizedBox(
-                                            height: starIconHeight,
-                                            child: const Align(
-                                                alignment: Alignment.center,
-                                                child:
-                                                    Icon(Icons.star_border))),
-                                        Text(
-                                          rating.toString(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium!
-                                              .copyWith(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .onBackground),
+                                        Flexible(
+                                          // child: Align(
+                                          //   alignment: Alignment.centerLeft,
+                                          child: Container(
+                                            width: screenWidth / 6,
+                                            height: iconContainerHeight,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                SizedBox(
+                                                    height: starIconHeight,
+                                                    child: Align(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        child: Image.asset(
+                                                            'assets/images/star-icon.png'))),
+                                                Text(
+                                                  rating.toString(),
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium!
+                                                      .copyWith(
+                                                          color: Theme.of(
+                                                                  context)
+                                                              .colorScheme
+                                                              .onBackground),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          // ),
+                                        ),
+                                        Flexible(
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10),
+                                            child: Container(
+                                              width: screenWidth / 4,
+                                              height: iconContainerHeight,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                              ),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  // Padding(
+                                                  //   padding:
+                                                  //       const EdgeInsets.only(
+                                                  //           top: 5),
+                                                  SizedBox(
+                                                      height: pinIconHeight,
+                                                      child: Align(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          child: Image.asset(
+                                                              'assets/images/pin-icon.jpg'))),
+                                                  // ),
+                                                  // Padding(
+                                                  //   padding:
+                                                  //       const EdgeInsets.only(
+                                                  //           left: 5, top: 5),
+                                                  Text(
+                                                    city,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .labelSmall!
+                                                        .copyWith(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .colorScheme
+                                                                .onBackground),
+                                                  ),
+                                                  // ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -170,45 +246,6 @@ class ElRestoListItem extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                Flexible(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 5),
-                                          child: Text(
-                                            'Open Hours: ',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelSmall!
-                                                .copyWith(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .onBackground),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 5, top: 5),
-                                          child: Text(
-                                            openHours,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelSmall!
-                                                .copyWith(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .onBackground),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
                               ],
                             ),
                           ),
@@ -219,24 +256,39 @@ class ElRestoListItem extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              width: screenWidth / 2,
+            SizedBox(
               height: titleHeight,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(40),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: Text(
-                    name,
-                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                        color: Theme.of(context).colorScheme.onBackground),
+              child: Align(
+                alignment: Alignment.center,
+                child: Container(
+                  width: screenWidth / 2,
+                  height: titleHeight,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(40),
+                      bottomRight: Radius.circular(40),
+                    ),
+                    // border: const Border(
+                    //     left: BorderSide(width: 1),
+                    //     right: BorderSide(width: 1),
+                    //     bottom: BorderSide(width: 1)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        name,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineLarge!
+                            .copyWith(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
                 ),
               ),
