@@ -2,14 +2,14 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 
-class ElRestoListItem extends StatelessWidget {
+class RestaurantListItem extends StatelessWidget {
   final String name;
   final String description;
   final String image;
   final String city;
   final double rating;
 
-  const ElRestoListItem({
+  const RestaurantListItem({
     super.key,
     required this.name,
     required this.description,
@@ -22,34 +22,31 @@ class ElRestoListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+
     final mobileCardHeight = screenHeight / 2;
-    // final mobileImgHeight = screenHeight / 3;
     final mobileTextBoxHeight = screenHeight / 6;
     final mobileTitleHeight = screenHeight / 12;
     final mobileIconContainerHeight = screenHeight / 30;
-    final mobileStarIconHeight = screenHeight / 50;
-    final mobilePinIconHeight = screenHeight / 30;
+    final mobileStarIconContainerWidth = screenWidth / 6;
+    final mobilePinIconContainerWidth = screenWidth / 3;
 
     double cardHeight = screenHeight * 1.25;
-    // double bgImgHeight = screenHeight;
-    // double restoImageHeight = screenHeight;
     double bgTextBoxHeight = screenHeight / 3;
     double textBoxHeight = screenHeight / 3;
     double titleHeight = screenHeight / 5;
     double iconContainerHeight = screenHeight / 10;
-    double starIconHeight = screenHeight / 15;
-    double pinIconHeight = screenHeight / 10;
+    double starIconContainerWidth = screenWidth / 8;
+    double pinIconContainerWidth = screenWidth / 5;
 
     if (ResponsiveBreakpoints.of(context).smallerOrEqualTo(MOBILE)) {
       cardHeight = mobileCardHeight;
-      // bgImgHeight = mobileImgHeight;
-      // restoImageHeight = mobileImgHeight;
+
       bgTextBoxHeight = mobileTextBoxHeight;
       textBoxHeight = mobileTextBoxHeight;
       titleHeight = mobileTitleHeight;
       iconContainerHeight = mobileIconContainerHeight;
-      starIconHeight = mobileStarIconHeight;
-      pinIconHeight = mobilePinIconHeight;
+      starIconContainerWidth = mobileStarIconContainerWidth;
+      pinIconContainerWidth = mobilePinIconContainerWidth;
     }
 
     return Card(
@@ -72,7 +69,6 @@ class ElRestoListItem extends StatelessWidget {
                       child: Stack(
                         children: [
                           Container(
-                            // height: bgImgHeight,
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
                                 colors: [
@@ -91,7 +87,6 @@ class ElRestoListItem extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(top: 5),
                             child: Container(
-                              // height: restoImageHeight,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: NetworkImage(image),
@@ -137,10 +132,8 @@ class ElRestoListItem extends StatelessWidget {
                                           MainAxisAlignment.start,
                                       children: [
                                         Flexible(
-                                          // child: Align(
-                                          //   alignment: Alignment.centerLeft,
                                           child: Container(
-                                            width: screenWidth / 6,
+                                            width: starIconContainerWidth,
                                             height: iconContainerHeight,
                                             decoration: BoxDecoration(
                                                 color: Colors.white,
@@ -150,13 +143,12 @@ class ElRestoListItem extends StatelessWidget {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                SizedBox(
-                                                    height: starIconHeight,
+                                                const SizedBox(
                                                     child: Align(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        child: Image.asset(
-                                                            'assets/images/star-icon.png'))),
+                                                  alignment: Alignment.center,
+                                                  child: Icon(
+                                                      Icons.star_rate_rounded),
+                                                )),
                                                 Text(
                                                   rating.toString(),
                                                   style: Theme.of(context)
@@ -171,14 +163,13 @@ class ElRestoListItem extends StatelessWidget {
                                               ],
                                             ),
                                           ),
-                                          // ),
                                         ),
                                         Flexible(
                                           child: Padding(
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 10),
                                             child: Container(
-                                              width: screenWidth / 4,
+                                              width: pinIconContainerWidth,
                                               height: iconContainerHeight,
                                               decoration: BoxDecoration(
                                                 color: Colors.white,
@@ -189,22 +180,11 @@ class ElRestoListItem extends StatelessWidget {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  // Padding(
-                                                  //   padding:
-                                                  //       const EdgeInsets.only(
-                                                  //           top: 5),
-                                                  SizedBox(
-                                                      height: pinIconHeight,
+                                                  const SizedBox(
                                                       child: Align(
-                                                          alignment:
-                                                              Alignment.center,
-                                                          child: Image.asset(
-                                                              'assets/images/pin-icon.jpg'))),
-                                                  // ),
-                                                  // Padding(
-                                                  //   padding:
-                                                  //       const EdgeInsets.only(
-                                                  //           left: 5, top: 5),
+                                                    alignment: Alignment.center,
+                                                    child: Icon(Icons.pin_drop),
+                                                  )),
                                                   Text(
                                                     city,
                                                     style: Theme.of(context)
@@ -216,7 +196,6 @@ class ElRestoListItem extends StatelessWidget {
                                                                 .colorScheme
                                                                 .onBackground),
                                                   ),
-                                                  // ),
                                                 ],
                                               ),
                                             ),
@@ -269,10 +248,6 @@ class ElRestoListItem extends StatelessWidget {
                       bottomLeft: Radius.circular(40),
                       bottomRight: Radius.circular(40),
                     ),
-                    // border: const Border(
-                    //     left: BorderSide(width: 1),
-                    //     right: BorderSide(width: 1),
-                    //     bottom: BorderSide(width: 1)),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(10),

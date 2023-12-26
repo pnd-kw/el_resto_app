@@ -1,6 +1,6 @@
 {
-    "name": "el_resto_app",
-    "short_name": "el_resto_app",
+    "name": "retaste_app",
+    "short_name": "retaste_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

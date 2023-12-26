@@ -1,6 +1,6 @@
-import 'package:el_resto_app/el_resto_detail.dart';
-import 'package:el_resto_app/el_resto_list.dart';
-import 'package:el_resto_app/theme.dart';
+import 'package:retaste_app/presentation/restaurant_detail.dart';
+import 'package:retaste_app/presentation/restaurant_list.dart';
+import 'package:retaste_app/utils/style/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'El Resto App',
+      title: 'Retaste',
       theme: theme,
       builder: (context, child) => ResponsiveBreakpoints.builder(
         child: child!,
@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const ElRestoList(),
-        '/el-resto-detail': (context) => const ElRestoDetail(),
+        '/': (context) => const RestaurantList(),
+        '/restaurant-detail': (context) => const RestaurantDetail(),
       },
     );
   }

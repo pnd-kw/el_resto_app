@@ -15,10 +15,13 @@ final TextTheme textTheme = TextTheme(
       fontStyle: FontStyle.italic,
       fontSize: 20,
     ),
-    titleLarge: GoogleFonts.lilyScriptOne(
-      fontSize: 24,
+    headlineSmall: GoogleFonts.libreBodoni(
+      fontWeight: FontWeight.bold,
+      fontStyle: FontStyle.italic,
+      fontSize: 12,
     ),
-    titleMedium: GoogleFonts.lilitaOne(
+    titleLarge: GoogleFonts.libreBaskerville(
+      fontWeight: FontWeight.bold,
       fontSize: 16,
     ),
     bodyMedium: GoogleFonts.libreBaskerville(

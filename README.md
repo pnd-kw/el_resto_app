@@ -1,6 +1,6 @@
-# el_resto_app
+# retaste_app
 
-A new Flutter project.
+Flutter restaurant application project.
 
 ## Getting Started
 

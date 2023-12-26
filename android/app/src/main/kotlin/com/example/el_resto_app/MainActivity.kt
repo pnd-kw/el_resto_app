@@ -1,4 +1,4 @@
-package com.example.el_resto_app
+package com.example.retaste_app
 
 import io.flutter.embedding.android.FlutterActivity
 
