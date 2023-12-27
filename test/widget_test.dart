@@ -7,13 +7,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:retaste_app/bloc/restaurant_bloc.dart';
 
 import 'package:retaste_app/main.dart';
+import 'package:retaste_app/repository/restaurant_data.dart';
 
 void main() {
+  final RestaurantData restaurantData = RestaurantData();
+  final RestaurantBloc restaurantBloc = RestaurantBloc(restaurantData);
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(MyApp(restaurantBloc: restaurantBloc));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

@@ -89,7 +89,8 @@ class RestaurantListItem extends StatelessWidget {
                             child: Container(
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: NetworkImage(image),
+                                  image: NetworkImage(
+                                      'https://restaurant-api.dicoding.dev/images/small/$image'),
                                   fit: BoxFit.cover,
                                 ),
                                 borderRadius: const BorderRadius.only(
