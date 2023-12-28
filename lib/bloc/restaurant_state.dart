@@ -28,3 +28,25 @@ class RestaurantError extends RestaurantState {
   @override
   List<Object> get props => [errorMessage];
 }
+
+class RestaurantDetailInitial extends RestaurantState {}
+
+class RestaurantDetailLoading extends RestaurantState {}
+
+class RestaurantDetailLoaded extends RestaurantState {
+  final RestaurantDetail restaurantDetail;
+
+  const RestaurantDetailLoaded({required this.restaurantDetail});
+
+  @override
+  List<Object> get props => [restaurantDetail];
+}
+
+class RestaurantDetailError extends RestaurantState {
+  final String errorMessage;
+
+  const RestaurantDetailError(this.errorMessage);
+
+  @override
+  List<Object> get props => [errorMessage];
+}

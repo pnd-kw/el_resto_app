@@ -3,16 +3,20 @@ import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class RestaurantDetailInfo extends StatefulWidget {
   final String name;
+  // final List<String> categoryName;
   final double rating;
   final String description;
   final String city;
+  final String address;
 
   const RestaurantDetailInfo({
     super.key,
     required this.name,
+    // required this.categoryName,
     required this.rating,
     required this.description,
     required this.city,
+    required this.address,
   });
 
   @override
@@ -31,10 +35,10 @@ class _RestaurantDetailInfoState extends State<RestaurantDetailInfo> {
     final mobileStarImgWidth = screenWidth / 9;
     final mobileStarImgHeight = screenHeight / 20;
     final mobileRatingWidth = screenWidth / 9;
-    final mobileContainerHeight = screenHeight / 4;
-    final mobileExpandedContainerHeight = screenHeight / 2;
-    const mobileContainerFlex = 2;
-    const mobileExpandedContainerFlex = 8;
+    final mobileContainerHeight = screenHeight / 3;
+    final mobileExpandedContainerHeight = screenHeight / 1.8;
+    const mobileContainerFlex = 1;
+    const mobileExpandedContainerFlex = 9;
 
     double titleContainerHeight = screenHeight / 8;
     double starImgWidth = screenWidth / 20;
@@ -67,10 +71,38 @@ class _RestaurantDetailInfoState extends State<RestaurantDetailInfo> {
               children: [
                 Expanded(
                   flex: 2,
-                  child: Text(
-                    widget.name,
-                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                        color: Theme.of(context).colorScheme.onBackground),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Text(
+                          widget.name,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge!
+                              .copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground),
+                        ),
+                      ),
+                      // Flexible(
+                      //   child: ListView.builder(
+                      //     itemCount: widget.categoryName.length,
+                      //     itemBuilder: (context, index) {
+                      //       return Text(
+                      //         widget.categoryName[index],
+                      //         style: Theme.of(context)
+                      //             .textTheme
+                      //             .labelSmall!
+                      //             .copyWith(
+                      //                 color: Theme.of(context)
+                      //                     .colorScheme
+                      //                     .onBackground),
+                      //       );
+                      //     },
+                      //   ),
+                      // ),
+                    ],
                   ),
                 ),
                 Flexible(
@@ -128,7 +160,7 @@ class _RestaurantDetailInfoState extends State<RestaurantDetailInfo> {
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             color: Theme.of(context).colorScheme.onBackground),
                         textAlign: TextAlign.justify,
-                        maxLines: isExpanded ? null : 4,
+                        maxLines: isExpanded ? null : 2,
                         overflow: isExpanded ? null : TextOverflow.ellipsis,
                       )),
                   buildTextButton(
@@ -149,12 +181,23 @@ class _RestaurantDetailInfoState extends State<RestaurantDetailInfo> {
                                   color: Theme.of(context).colorScheme.primary),
                         )),
                   ),
-                  buildInfoTitle(context, 'City', const Icon(Icons.pin_drop)),
+                  buildInfoTitle(
+                      context, 'City', const Icon(Icons.location_city_rounded)),
                   buildInfoContent(
                       context,
                       1,
                       Text(
                         widget.city,
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                            color: Theme.of(context).colorScheme.onBackground),
+                      )),
+                  buildInfoTitle(
+                      context, 'Address', const Icon(Icons.pin_drop_rounded)),
+                  buildInfoContent(
+                      context,
+                      1,
+                      Text(
+                        widget.address,
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             color: Theme.of(context).colorScheme.onBackground),
                       )),

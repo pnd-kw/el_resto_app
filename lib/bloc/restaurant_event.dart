@@ -8,3 +8,12 @@ class RestaurantEvent extends Equatable {
 }
 
 class FetchRestaurant extends RestaurantEvent {}
+
+class FetchRestaurantDetail extends RestaurantEvent {
+  final String id;
+
+  const FetchRestaurantDetail({required this.id});
+
+  @override
+  List<Object> get props => [id];
+}

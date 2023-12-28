@@ -11,13 +11,16 @@ import 'package:retaste_app/bloc/restaurant_bloc.dart';
 
 import 'package:retaste_app/main.dart';
 import 'package:retaste_app/repository/restaurant_data.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  final RestaurantData restaurantData = RestaurantData();
+void main() async {
+  final sharedPreferences = await SharedPreferences.getInstance();
+  final RestaurantData restaurantData =
+      RestaurantData(sharedPreferences: sharedPreferences);
   final RestaurantBloc restaurantBloc = RestaurantBloc(restaurantData);
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp(restaurantBloc: restaurantBloc));
+    await tester.pumpWidget(RetasteApp(restaurantBloc: restaurantBloc));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

@@ -1,22 +1,29 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retaste_app/bloc/restaurant_bloc.dart';
-import 'package:retaste_app/presentation/restaurant_detail.dart';
-import 'package:retaste_app/presentation/restaurant_list.dart';
+import 'package:retaste_app/presentation/restaurant_detail_screen.dart';
+import 'package:retaste_app/presentation/restaurant_list_screen.dart';
 import 'package:retaste_app/repository/restaurant_data.dart';
 import 'package:retaste_app/utils/style/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  final RestaurantData restaurantData = RestaurantData();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final sharedPreferences = await SharedPreferences.getInstance();
+
+  final RestaurantData restaurantData =
+      RestaurantData(sharedPreferences: sharedPreferences);
   final RestaurantBloc restaurantBloc = RestaurantBloc(restaurantData);
-  runApp(MyApp(restaurantBloc: restaurantBloc));
+
+  runApp(RetasteApp(restaurantBloc: restaurantBloc));
 }
 
-class MyApp extends StatelessWidget {
+class RetasteApp extends StatelessWidget {
   final RestaurantBloc restaurantBloc;
 
-  const MyApp({super.key, required this.restaurantBloc});
+  const RetasteApp({super.key, required this.restaurantBloc});
 
   // This widget is the root of this application.
   @override
@@ -37,8 +44,9 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => const RestaurantList(),
-          // '/restaurant-detail': (context) => const RestaurantDetail(),
+          '/': (context) => const RestaurantListScreen(),
+          '/restaurant-detail-screen': (context) =>
+              const RestaurantDetailScreen(),
         },
       ),
     );

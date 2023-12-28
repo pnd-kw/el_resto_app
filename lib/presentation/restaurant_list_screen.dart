@@ -5,14 +5,14 @@ import 'package:retaste_app/bloc/restaurant_bloc.dart';
 import 'package:retaste_app/widget/restaurant_list_item.dart';
 import 'package:flutter/material.dart';
 
-class RestaurantList extends StatefulWidget {
-  const RestaurantList({super.key});
+class RestaurantListScreen extends StatefulWidget {
+  const RestaurantListScreen({super.key});
 
   @override
-  State<RestaurantList> createState() => _RestaurantListState();
+  State<RestaurantListScreen> createState() => _RestaurantListScreenState();
 }
 
-class _RestaurantListState extends State<RestaurantList> {
+class _RestaurantListScreenState extends State<RestaurantListScreen> {
   late RestaurantBloc _restaurantBloc;
 
   @override
@@ -61,7 +61,14 @@ class _RestaurantListState extends State<RestaurantList> {
                 itemCount: state.restaurants.length,
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      String restaurantId = state.restaurants[index].id;
+                      // _restaurantBloc
+                      //     .add(FetchRestaurantDetail(id: restaurantId));
+                      Navigator.of(context).pushNamed(
+                          '/restaurant-detail-screen',
+                          arguments: restaurantId);
+                    },
                     child: RestaurantListItem(
                       name: state.restaurants[index].name,
                       description: state.restaurants[index].description,
