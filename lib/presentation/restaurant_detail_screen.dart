@@ -36,6 +36,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
     // final Restaurant restaurant =
     //     ModalRoute.of(context)!.settings.arguments as Restaurant;
 
+    final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
     final mobileExpandedHeight = screenHeight / 3;
@@ -112,7 +113,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                           description: description,
                           city: city,
                           address: address,
-                          // categoryName: categoryName,
+                          categoryName: categoryName,
                         ),
                       ],
                     ),
@@ -187,6 +188,123 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                       ],
                     ),
                   ),
+                  SliverToBoxAdapter(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20),
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: Text(
+                              'Customer Reviews',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20),
+                          child: SizedBox(
+                            height: screenHeight / 6,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Flexible(
+                                  flex: 1,
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: SizedBox(
+                                      width: screenWidth / 4,
+                                      height: screenHeight / 10,
+                                      child: ClipOval(
+                                        child: Image.asset(
+                                          'assets/images/profile-img-placeholder.jpg',
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 3,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 20),
+                                    child: SizedBox(
+                                      height: screenHeight / 8,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Flexible(
+                                              flex: 1,
+                                              child: Align(
+                                                alignment: Alignment.centerLeft,
+                                                child: Text(
+                                                  'John Doe',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium!
+                                                      .copyWith(
+                                                          color: Theme.of(
+                                                                  context)
+                                                              .colorScheme
+                                                              .onBackground),
+                                                  textAlign: TextAlign.start,
+                                                ),
+                                              )),
+                                          Flexible(
+                                              flex: 1,
+                                              child: Align(
+                                                alignment: Alignment.centerLeft,
+                                                child: Text(
+                                                  '29 Desember 2023',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium!
+                                                      .copyWith(
+                                                          color: Theme.of(
+                                                                  context)
+                                                              .colorScheme
+                                                              .onBackground),
+                                                  textAlign: TextAlign.start,
+                                                ),
+                                              )),
+                                          Expanded(
+                                              flex: 4,
+                                              child: Align(
+                                                alignment: Alignment.centerLeft,
+                                                child: Text(
+                                                  'Makanan nya enak, banyak pilihan menu, harga cukup bersahabat!',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodySmall!
+                                                      .copyWith(
+                                                          color: Theme.of(
+                                                                  context)
+                                                              .colorScheme
+                                                              .onBackground),
+                                                  textAlign: TextAlign.justify,
+                                                ),
+                                              ))
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             );

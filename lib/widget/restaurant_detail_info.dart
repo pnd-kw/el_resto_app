@@ -3,7 +3,7 @@ import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class RestaurantDetailInfo extends StatefulWidget {
   final String name;
-  // final List<String> categoryName;
+  final List<String> categoryName;
   final double rating;
   final String description;
   final String city;
@@ -12,7 +12,7 @@ class RestaurantDetailInfo extends StatefulWidget {
   const RestaurantDetailInfo({
     super.key,
     required this.name,
-    // required this.categoryName,
+    required this.categoryName,
     required this.rating,
     required this.description,
     required this.city,
@@ -71,38 +71,10 @@ class _RestaurantDetailInfoState extends State<RestaurantDetailInfo> {
               children: [
                 Expanded(
                   flex: 2,
-                  child: Row(
-                    children: [
-                      Flexible(
-                        child: Text(
-                          widget.name,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineLarge!
-                              .copyWith(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onBackground),
-                        ),
-                      ),
-                      // Flexible(
-                      //   child: ListView.builder(
-                      //     itemCount: widget.categoryName.length,
-                      //     itemBuilder: (context, index) {
-                      //       return Text(
-                      //         widget.categoryName[index],
-                      //         style: Theme.of(context)
-                      //             .textTheme
-                      //             .labelSmall!
-                      //             .copyWith(
-                      //                 color: Theme.of(context)
-                      //                     .colorScheme
-                      //                     .onBackground),
-                      //       );
-                      //     },
-                      //   ),
-                      // ),
-                    ],
+                  child: Text(
+                    widget.name,
+                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground),
                   ),
                 ),
                 Flexible(
@@ -137,6 +109,44 @@ class _RestaurantDetailInfoState extends State<RestaurantDetailInfo> {
                   ),
                 ),
               ],
+            ),
+          ),
+        ),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: SizedBox(
+              height: screenHeight / 35,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: widget.categoryName.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: Container(
+                      width: screenWidth / 4,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          widget.categoryName[index],
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelSmall!
+                              .copyWith(
+                                  color:
+                                      Theme.of(context).colorScheme.background),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ),

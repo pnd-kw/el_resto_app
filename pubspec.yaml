@@ -73,6 +73,7 @@ flutter:
     - assets/local_restaurant.json
     - assets/images/img-placeholder.png
     - assets/images/star.png
+    - assets/images/profile-img-placeholder.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
