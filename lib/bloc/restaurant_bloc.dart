@@ -12,6 +12,8 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
 
   RestaurantBloc(this._restaurantData) : super(RestaurantInitial()) {
     on<FetchRestaurant>((event, emit) => addDataToState(emit));
+    on<RestaurantNavigatorActionEvent>(
+        (event, emit) => restaurantNavigator(emit, event.id));
     on<FetchRestaurantDetail>(
         (event, emit) => getRestaurantDetail(emit, event.id));
   }
@@ -41,5 +43,10 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
     } catch (e) {
       emit(const RestaurantDetailError('Failed to load restaurant detail'));
     }
+  }
+
+  Future<void> restaurantNavigator(
+      Emitter<RestaurantState> emit, String restaurantId) async {
+    emit(RestaurantNavigatorActionState(restaurantId));
   }
 }

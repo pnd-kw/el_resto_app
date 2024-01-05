@@ -1,6 +1,6 @@
-// import 'package:retaste_app/model/retaurant.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retaste_app/bloc/restaurant_bloc.dart';
+import 'package:retaste_app/widget/customer_review_item.dart';
 import 'package:retaste_app/widget/restaurant_detail_info.dart';
 import 'package:retaste_app/widget/restaurant_menu_item.dart';
 import 'package:flutter/material.dart';
@@ -33,10 +33,6 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final Restaurant restaurant =
-    //     ModalRoute.of(context)!.settings.arguments as Restaurant;
-
-    final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
     final mobileExpandedHeight = screenHeight / 3;
@@ -119,192 +115,122 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                     ),
                   ),
                   SliverToBoxAdapter(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
-                          child: SizedBox(
-                            width: double.infinity,
-                            child: Text(
-                              'Foods',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge!
-                                  .copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          height: 200,
-                          child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount:
-                                  state.restaurantDetail.menus.foods.length,
-                              itemBuilder: (context, index) =>
-                                  RestaurantMenuItem(
-                                      menuTitle: state.restaurantDetail.menus
-                                          .foods[index].name)),
-                        ),
-                      ],
+                    child: buildMenu(
+                      context,
+                      'Foods',
+                      state.restaurantDetail.menus.foods.length,
+                      (context, index) => RestaurantMenuItem(
+                          menuTitle:
+                              state.restaurantDetail.menus.foods[index].name),
                     ),
+                    // child: Column(
+                    //   children: [
+                    //     Padding(
+                    //       padding: const EdgeInsets.symmetric(
+                    //           vertical: 10, horizontal: 20),
+                    //       child: SizedBox(
+                    //         width: double.infinity,
+                    //         child: Text(
+                    //           'Foods',
+                    //           style: Theme.of(context)
+                    //               .textTheme
+                    //               .titleLarge!
+                    //               .copyWith(
+                    //                   color: Theme.of(context)
+                    //                       .colorScheme
+                    //                       .onBackground),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     SizedBox(
+                    //       width: double.infinity,
+                    //       height: 200,
+                    //       child: ListView.builder(
+                    //           scrollDirection: Axis.horizontal,
+                    //           itemCount:
+                    //               state.restaurantDetail.menus.foods.length,
+                    //           itemBuilder: (context, index) =>
+                    //               RestaurantMenuItem(
+                    //                   menuTitle: state.restaurantDetail.menus
+                    //                       .foods[index].name)),
+                    //     ),
+                    //   ],
+                    // ),
                   ),
                   SliverToBoxAdapter(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
-                          child: SizedBox(
-                            width: double.infinity,
-                            child: Text(
-                              'Drinks',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge!
-                                  .copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          height: 200,
-                          child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount:
-                                  state.restaurantDetail.menus.drinks.length,
-                              itemBuilder: (context, index) =>
-                                  RestaurantMenuItem(
-                                      menuTitle: state.restaurantDetail.menus
-                                          .drinks[index].name)),
-                        ),
-                      ],
+                    child: buildMenu(
+                      context,
+                      'Drinks',
+                      state.restaurantDetail.menus.drinks.length,
+                      (context, index) => RestaurantMenuItem(
+                          menuTitle:
+                              state.restaurantDetail.menus.drinks[index].name),
                     ),
+                    // child: Column(
+                    //   children: [
+                    //     Padding(
+                    //       padding: const EdgeInsets.symmetric(
+                    //           vertical: 10, horizontal: 20),
+                    //       child: SizedBox(
+                    //         width: double.infinity,
+                    //         child: Text(
+                    //           'Drinks',
+                    //           style: Theme.of(context)
+                    //               .textTheme
+                    //               .titleLarge!
+                    //               .copyWith(
+                    //                   color: Theme.of(context)
+                    //                       .colorScheme
+                    //                       .onBackground),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     SizedBox(
+                    //       width: double.infinity,
+                    //       height: 200,
+                    //       child: ListView.builder(
+                    //           scrollDirection: Axis.horizontal,
+                    //           itemCount:
+                    //               state.restaurantDetail.menus.drinks.length,
+                    //           itemBuilder: (context, index) =>
+                    //               RestaurantMenuItem(
+                    //                   menuTitle: state.restaurantDetail.menus
+                    //                       .drinks[index].name)),
+                    //     ),
+                    //   ],
+                    // ),
                   ),
                   SliverToBoxAdapter(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
-                          child: SizedBox(
-                            width: double.infinity,
-                            child: Text(
-                              'Customer Reviews',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge!
-                                  .copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground),
-                            ),
-                          ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          'Customer Reviews',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge!
+                              .copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
-                          child: SizedBox(
-                            height: screenHeight / 6,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Flexible(
-                                  flex: 1,
-                                  child: Align(
-                                    alignment: Alignment.center,
-                                    child: SizedBox(
-                                      width: screenWidth / 4,
-                                      height: screenHeight / 10,
-                                      child: ClipOval(
-                                        child: Image.asset(
-                                          'assets/images/profile-img-placeholder.jpg',
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 3,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 20),
-                                    child: SizedBox(
-                                      height: screenHeight / 8,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Flexible(
-                                              flex: 1,
-                                              child: Align(
-                                                alignment: Alignment.centerLeft,
-                                                child: Text(
-                                                  'John Doe',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyMedium!
-                                                      .copyWith(
-                                                          color: Theme.of(
-                                                                  context)
-                                                              .colorScheme
-                                                              .onBackground),
-                                                  textAlign: TextAlign.start,
-                                                ),
-                                              )),
-                                          Flexible(
-                                              flex: 1,
-                                              child: Align(
-                                                alignment: Alignment.centerLeft,
-                                                child: Text(
-                                                  '29 Desember 2023',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyMedium!
-                                                      .copyWith(
-                                                          color: Theme.of(
-                                                                  context)
-                                                              .colorScheme
-                                                              .onBackground),
-                                                  textAlign: TextAlign.start,
-                                                ),
-                                              )),
-                                          Expanded(
-                                              flex: 4,
-                                              child: Align(
-                                                alignment: Alignment.centerLeft,
-                                                child: Text(
-                                                  'Makanan nya enak, banyak pilihan menu, harga cukup bersahabat!',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodySmall!
-                                                      .copyWith(
-                                                          color: Theme.of(
-                                                                  context)
-                                                              .colorScheme
-                                                              .onBackground),
-                                                  textAlign: TextAlign.justify,
-                                                ),
-                                              ))
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  )
+                  ),
+                  SliverList.builder(
+                    itemCount: state.restaurantDetail.customerReviews.length,
+                    itemBuilder: (context, index) {
+                      return CustomerReviewItem(
+                          name: state
+                              .restaurantDetail.customerReviews[index].name,
+                          date: state
+                              .restaurantDetail.customerReviews[index].date,
+                          review: state
+                              .restaurantDetail.customerReviews[index].review);
+                    },
+                  ),
                 ],
               ),
             );
@@ -322,3 +248,31 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
     );
   }
 }
+
+Widget buildMenu(BuildContext context, String title, int itemCount,
+        Widget Function(BuildContext, int) itemBuilder) =>
+    Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          child: SizedBox(
+            width: double.infinity,
+            child: Text(
+              title,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(color: Theme.of(context).colorScheme.onBackground),
+            ),
+          ),
+        ),
+        SizedBox(
+          width: double.infinity,
+          height: 200,
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: itemCount,
+              itemBuilder: itemBuilder),
+        ),
+      ],
+    );

@@ -25,7 +25,6 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    // final RestaurantData restaurantData = RestaurantData();
 
     return Scaffold(
       appBar: AppBar(
@@ -36,6 +35,15 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
               .displayLarge!
               .copyWith(color: Theme.of(context).colorScheme.onBackground),
         ),
+        actions: [
+          SizedBox(
+            height: screenHeight / 12,
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.search),
+            ),
+          )
+        ],
       ),
       body: Container(
         width: double.infinity,
@@ -45,84 +53,56 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          child: BlocBuilder<RestaurantBloc, RestaurantState>(
-              builder: (context, state) {
-            // final restaurantBloc = BlocProvider.of<RestaurantBloc>(context);
-
-            if (state is RestaurantLoading) {
-              return Center(
-                child: SizedBox(
-                  height: screenHeight / 20,
-                  child: const CircularProgressIndicator(),
-                ),
-              );
-            } else if (state is RestaurantLoaded) {
-              return ListView.builder(
-                itemCount: state.restaurants.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      String restaurantId = state.restaurants[index].id;
-                      // _restaurantBloc
-                      //     .add(FetchRestaurantDetail(id: restaurantId));
-                      Navigator.of(context).pushNamed(
-                          '/restaurant-detail-screen',
-                          arguments: restaurantId);
-                    },
-                    child: RestaurantListItem(
-                      name: state.restaurants[index].name,
-                      description: state.restaurants[index].description,
-                      image: state.restaurants[index].pictureId,
-                      city: state.restaurants[index].city,
-                      rating: state.restaurants[index].rating,
-                    ),
-                  );
-                },
-              );
-            } else if (state is RestaurantError) {
-              return Center(
-                child: Text(state.errorMessage),
-              );
-            } else {
-              return const Center(
-                child: Text('Unknown state'),
-              );
-            }
-          }),
-          // child: FutureBuilder(
-          //   future: restaurantData.getRestaurantData(),
-          //   builder: (BuildContext context,
-          //       AsyncSnapshot<List<Restaurant>> snapshot) {
-          //     if (snapshot.connectionState == ConnectionState.waiting) {
-          //       return const CircularProgressIndicator();
-          //     } else if (snapshot.hasError) {
-          //       return Text('Error: ${snapshot.error}');
-          //     } else if (snapshot.hasData) {
-          //       List<Restaurant> restaurants = snapshot.data!;
-
-          //       return ListView.builder(
-          //           itemCount: restaurants.length,
-          //           itemBuilder: (context, index) {
-          //             var restaurant = restaurants[index];
-          //             return InkWell(
-          //               onTap: () {
-          //                 Navigator.of(context).pushNamed('/restaurant-detail',
-          //                     arguments: restaurant);
-          //               },
-          //               child: RestaurantListItem(
-          //                 name: restaurant.name,
-          //                 description: restaurant.description,
-          //                 // image: restaurant.image,
-          //                 city: restaurant.city,
-          //                 rating: restaurant.rating,
-          //               ),
-          //             );
-          //           });
-          //     } else {
-          //       return const Text('No data available');
-          //     }
-          //   },
-          // ),
+          child: BlocConsumer<RestaurantBloc, RestaurantState>(
+            listenWhen: (previous, current) => current is RestaurantActionState,
+            buildWhen: (previous, current) =>
+                current is RestaurantLoading || current is RestaurantLoaded,
+            listener: (context, state) {
+              if (state is RestaurantNavigatorActionState) {
+                String restaurantId = state.id;
+                Navigator.of(context).pushNamed('/restaurant-detail-screen',
+                    arguments: restaurantId);
+              }
+            },
+            builder: (context, state) {
+              if (state is RestaurantLoading) {
+                return Center(
+                  child: SizedBox(
+                    height: screenHeight / 20,
+                    child: const CircularProgressIndicator(),
+                  ),
+                );
+              } else if (state is RestaurantLoaded) {
+                return ListView.builder(
+                  itemCount: state.restaurants.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        String restaurantId = state.restaurants[index].id;
+                        _restaurantBloc
+                            .add(RestaurantNavigatorActionEvent(restaurantId));
+                      },
+                      child: RestaurantListItem(
+                        name: state.restaurants[index].name,
+                        description: state.restaurants[index].description,
+                        image: state.restaurants[index].pictureId,
+                        city: state.restaurants[index].city,
+                        rating: state.restaurants[index].rating,
+                      ),
+                    );
+                  },
+                );
+              } else if (state is RestaurantError) {
+                return Center(
+                  child: Text(state.errorMessage),
+                );
+              } else {
+                return const Center(
+                  child: Text('Unknown state'),
+                );
+              }
+            },
+          ),
         ),
       ),
     );

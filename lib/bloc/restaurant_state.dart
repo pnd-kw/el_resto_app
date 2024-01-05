@@ -50,3 +50,14 @@ class RestaurantDetailError extends RestaurantState {
   @override
   List<Object> get props => [errorMessage];
 }
+
+abstract class RestaurantActionState extends RestaurantState {}
+
+class RestaurantNavigatorActionState extends RestaurantActionState {
+  final String id;
+
+  RestaurantNavigatorActionState(this.id);
+
+  @override
+  List<Object> get props => [id];
+}
