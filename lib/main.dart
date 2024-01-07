@@ -2,7 +2,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retaste_app/bloc/restaurant_bloc.dart';
 import 'package:retaste_app/presentation/restaurant_detail_screen.dart';
 import 'package:retaste_app/presentation/restaurant_list_screen.dart';
+// import 'package:retaste_app/presentation/restaurant_search_result_screen.dart';
+import 'package:retaste_app/presentation/restaurant_search_screen.dart';
 import 'package:retaste_app/repository/restaurant_data.dart';
+// import 'package:retaste_app/utils/search_result_arguments.dart';
 import 'package:retaste_app/utils/style/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -47,6 +50,11 @@ class RetasteApp extends StatelessWidget {
           '/': (context) => const RestaurantListScreen(),
           '/restaurant-detail-screen': (context) =>
               const RestaurantDetailScreen(),
+          '/restaurant-search-screen': (context) =>
+              const RestaurantSearchScreen(),
+
+          // '/restaurant-search-result-screen': (context) =>
+          //     const SearchResultScreen(textFieldKey: textFieldKey),
         },
       ),
     );

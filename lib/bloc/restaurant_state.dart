@@ -29,6 +29,30 @@ class RestaurantError extends RestaurantState {
   List<Object> get props => [errorMessage];
 }
 
+class RestaurantByQueryInitial extends RestaurantState {}
+
+class RestaurantByQueryLoading extends RestaurantState {}
+
+class RestaurantByQueryLoaded extends RestaurantState {
+  final List<Restaurant> restaurants;
+
+  const RestaurantByQueryLoaded(this.restaurants);
+
+  @override
+  List<Object> get props => [restaurants];
+}
+
+class RestaurantByQueryEmpty extends RestaurantState {}
+
+class RestaurantByQueryError extends RestaurantState {
+  final String errorMessage;
+
+  const RestaurantByQueryError(this.errorMessage);
+
+  @override
+  List<Object> get props => [errorMessage];
+}
+
 class RestaurantDetailInitial extends RestaurantState {}
 
 class RestaurantDetailLoading extends RestaurantState {}

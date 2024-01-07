@@ -1,7 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retaste_app/bloc/restaurant_bloc.dart';
-// import 'package:retaste_app/model/retaurant.dart';
-// import 'package:retaste_app/repository/restaurant_data.dart';
 import 'package:retaste_app/widget/restaurant_list_item.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +12,7 @@ class RestaurantListScreen extends StatefulWidget {
 
 class _RestaurantListScreenState extends State<RestaurantListScreen> {
   late RestaurantBloc _restaurantBloc;
+  // bool _isSearching = false;
 
   @override
   void initState() {
@@ -28,6 +27,25 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        // title: _isSearching
+        //     ? SizedBox(
+        //         height: screenHeight / 20,
+        //         child: TextField(
+        //           decoration: InputDecoration(
+        //               hintText: 'search restaurant name or menu here...',
+        //               hintStyle: Theme.of(context)
+        //                   .textTheme
+        //                   .bodySmall!
+        //                   .copyWith(
+        //                       color:
+        //                           Theme.of(context).colorScheme.onBackground),
+        //               enabledBorder: OutlineInputBorder(
+        //                 borderSide: const BorderSide(width: 1),
+        //                 borderRadius: BorderRadius.circular(10),
+        //               )),
+        //         ),
+        //       )
+        //     :
         title: Text(
           'Retaste',
           style: Theme.of(context)
@@ -39,7 +57,12 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
           SizedBox(
             height: screenHeight / 12,
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                // setState(() {
+                //   _isSearching = !_isSearching;
+                // });
+                Navigator.of(context).pushNamed('/restaurant-search-screen');
+              },
               icon: const Icon(Icons.search),
             ),
           )

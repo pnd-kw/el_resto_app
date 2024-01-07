@@ -12,6 +12,8 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
 
   RestaurantBloc(this._restaurantData) : super(RestaurantInitial()) {
     on<FetchRestaurant>((event, emit) => addDataToState(emit));
+    on<FetchRestaurantByQuery>(
+        (event, emit) => getRestaurantByQuery(emit, event.query));
     on<RestaurantNavigatorActionEvent>(
         (event, emit) => restaurantNavigator(emit, event.id));
     on<FetchRestaurantDetail>(
@@ -28,6 +30,25 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
       emit(RestaurantLoaded(restaurantData));
     } catch (e) {
       emit(const RestaurantError('Failed to load restaurants'));
+    }
+  }
+
+  Future<void> getRestaurantByQuery(
+      Emitter<RestaurantState> emit, String query) async {
+    try {
+      emit(RestaurantByQueryInitial());
+      emit(RestaurantByQueryLoading());
+
+      final List<Restaurant> restaurantData =
+          await _restaurantData.searchRestaurantData(query);
+
+      if (restaurantData.isEmpty) {
+        emit(RestaurantByQueryEmpty());
+      } else {
+        emit(RestaurantByQueryLoaded(restaurantData));
+      }
+    } catch (e) {
+      emit(const RestaurantByQueryError('Failed to search restaurants'));
     }
   }
 

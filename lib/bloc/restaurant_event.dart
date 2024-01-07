@@ -9,6 +9,15 @@ class RestaurantEvent extends Equatable {
 
 class FetchRestaurant extends RestaurantEvent {}
 
+class FetchRestaurantByQuery extends RestaurantEvent {
+  final String query;
+
+  const FetchRestaurantByQuery(this.query);
+
+  @override
+  List<Object> get props => [];
+}
+
 class FetchRestaurantDetail extends RestaurantEvent {
   final String id;
 

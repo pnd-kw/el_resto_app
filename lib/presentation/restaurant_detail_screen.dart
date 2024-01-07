@@ -123,39 +123,6 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                           menuTitle:
                               state.restaurantDetail.menus.foods[index].name),
                     ),
-                    // child: Column(
-                    //   children: [
-                    //     Padding(
-                    //       padding: const EdgeInsets.symmetric(
-                    //           vertical: 10, horizontal: 20),
-                    //       child: SizedBox(
-                    //         width: double.infinity,
-                    //         child: Text(
-                    //           'Foods',
-                    //           style: Theme.of(context)
-                    //               .textTheme
-                    //               .titleLarge!
-                    //               .copyWith(
-                    //                   color: Theme.of(context)
-                    //                       .colorScheme
-                    //                       .onBackground),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     SizedBox(
-                    //       width: double.infinity,
-                    //       height: 200,
-                    //       child: ListView.builder(
-                    //           scrollDirection: Axis.horizontal,
-                    //           itemCount:
-                    //               state.restaurantDetail.menus.foods.length,
-                    //           itemBuilder: (context, index) =>
-                    //               RestaurantMenuItem(
-                    //                   menuTitle: state.restaurantDetail.menus
-                    //                       .foods[index].name)),
-                    //     ),
-                    //   ],
-                    // ),
                   ),
                   SliverToBoxAdapter(
                     child: buildMenu(
@@ -166,39 +133,6 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                           menuTitle:
                               state.restaurantDetail.menus.drinks[index].name),
                     ),
-                    // child: Column(
-                    //   children: [
-                    //     Padding(
-                    //       padding: const EdgeInsets.symmetric(
-                    //           vertical: 10, horizontal: 20),
-                    //       child: SizedBox(
-                    //         width: double.infinity,
-                    //         child: Text(
-                    //           'Drinks',
-                    //           style: Theme.of(context)
-                    //               .textTheme
-                    //               .titleLarge!
-                    //               .copyWith(
-                    //                   color: Theme.of(context)
-                    //                       .colorScheme
-                    //                       .onBackground),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     SizedBox(
-                    //       width: double.infinity,
-                    //       height: 200,
-                    //       child: ListView.builder(
-                    //           scrollDirection: Axis.horizontal,
-                    //           itemCount:
-                    //               state.restaurantDetail.menus.drinks.length,
-                    //           itemBuilder: (context, index) =>
-                    //               RestaurantMenuItem(
-                    //                   menuTitle: state.restaurantDetail.menus
-                    //                       .drinks[index].name)),
-                    //     ),
-                    //   ],
-                    // ),
                   ),
                   SliverToBoxAdapter(
                     child: Padding(
