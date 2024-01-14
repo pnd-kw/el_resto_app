@@ -9,16 +9,41 @@ part 'restaurant_state.dart';
 
 class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
   final RestaurantData _restaurantData;
+  // List<String> searchKeywords = [];
 
   RestaurantBloc(this._restaurantData) : super(RestaurantInitial()) {
     on<FetchRestaurant>((event, emit) => addDataToState(emit));
     on<FetchRestaurantByQuery>(
         (event, emit) => getRestaurantByQuery(emit, event.query));
+    // on<AddSearchKeywordEvent>((event, emit) => searchHistory(event.keyword));
+    on<RestaurantSearchNavigatorActionEvent>(
+        (event, emit) => restaurantSearchNavigator(emit, event.id));
     on<RestaurantNavigatorActionEvent>(
         (event, emit) => restaurantNavigator(emit, event.id));
     on<FetchRestaurantDetail>(
         (event, emit) => getRestaurantDetail(emit, event.id));
   }
+
+  // List<String> searchHistory(String keyword) {
+  //   searchKeywords.remove(keyword);
+
+  //   searchKeywords.insert(0, keyword);
+
+  //   if (searchKeywords.length > 9) {
+  //     searchKeywords = searchKeywords.sublist(0, 9);
+  //   }
+
+  //   print(searchKeywords);
+  //   return searchKeywords;
+  // }
+
+  // Future<void> saveSearchKeywords() async {
+  //   _sharedPreferences.setStringList('searchKeywords', searchKeywords);
+  // }
+
+  // Future<void> loadSearchKeywords() async {
+  //   _sharedPreferences.getStringList('searchKeywords') ?? [];
+  // }
 
   Future<void> addDataToState(Emitter<RestaurantState> emit) async {
     try {
@@ -36,7 +61,6 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
   Future<void> getRestaurantByQuery(
       Emitter<RestaurantState> emit, String query) async {
     try {
-      emit(RestaurantByQueryInitial());
       emit(RestaurantByQueryLoading());
 
       final List<Restaurant> restaurantData =
@@ -66,8 +90,12 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
     }
   }
 
-  Future<void> restaurantNavigator(
-      Emitter<RestaurantState> emit, String restaurantId) async {
+  void restaurantNavigator(Emitter<RestaurantState> emit, String restaurantId) {
     emit(RestaurantNavigatorActionState(restaurantId));
+  }
+
+  void restaurantSearchNavigator(
+      Emitter<RestaurantState> emit, String restaurantId) {
+    emit(RestaurantSearchNavigatorActionState(restaurantId));
   }
 }

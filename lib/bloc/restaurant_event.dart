@@ -35,3 +35,21 @@ class RestaurantNavigatorActionEvent extends RestaurantEvent {
   @override
   List<Object> get props => [id];
 }
+
+class RestaurantSearchNavigatorActionEvent extends RestaurantEvent {
+  final String id;
+
+  const RestaurantSearchNavigatorActionEvent(this.id);
+
+  @override
+  List<Object> get props => [id];
+}
+
+class AddSearchKeywordEvent extends RestaurantEvent {
+  final String keyword;
+
+  const AddSearchKeywordEvent(this.keyword);
+
+  @override
+  List<Object> get props => [keyword];
+}

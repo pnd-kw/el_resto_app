@@ -1,30 +1,26 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:retaste_app/model/restaurant_detail.dart';
 import 'package:retaste_app/model/restaurant.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 class RestaurantData {
-  final SharedPreferences _sharedPreferences;
-
   final baseUrl = 'https://restaurant-api.dicoding.dev';
 
   final getRestaurant = '/list';
   final getRestaurantDetail = '/detail/';
   final searchRestaurant = '/search?q=';
 
-  const RestaurantData({
-    required SharedPreferences sharedPreferences,
-  }) : _sharedPreferences = sharedPreferences;
+  // RestaurantData({
+  //   required SharedPreferences sharedPreferences,
+  // }) : _sharedPreferences = sharedPreferences;
 
-  Future<void> saveRestaurantsToLocalStorage(
-      List<Restaurant> restaurants) async {
-    final String data =
-        jsonEncode(restaurants.map((value) => value.toJson()).toList());
+  // Future<void> saveRestaurantsToLocalStorage(
+  //     List<Restaurant> restaurants) async {
+  //   final String data =
+  //       jsonEncode(restaurants.map((value) => value.toJson()).toList());
 
-    _sharedPreferences.setString('cachedRestaurants', data);
-  }
+  //   _sharedPreferences.setString('cachedRestaurants', data);
+  // }
 
   // Future<List<Restaurant>> getRestaurantFromLocalStorage() async {
   //   final String? data = _sharedPreferences.getString('cachedRestaurants');

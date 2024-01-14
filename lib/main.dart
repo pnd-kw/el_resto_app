@@ -1,10 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retaste_app/bloc/cubit/cubit/restaurant_search_keywords_cubit.dart';
 import 'package:retaste_app/bloc/restaurant_bloc.dart';
 import 'package:retaste_app/presentation/restaurant_detail_screen.dart';
 import 'package:retaste_app/presentation/restaurant_list_screen.dart';
 // import 'package:retaste_app/presentation/restaurant_search_result_screen.dart';
 import 'package:retaste_app/presentation/restaurant_search_screen.dart';
 import 'package:retaste_app/repository/restaurant_data.dart';
+import 'package:retaste_app/repository/restaurant_search_keywords_data.dart';
 // import 'package:retaste_app/utils/search_result_arguments.dart';
 import 'package:retaste_app/utils/style/theme.dart';
 import 'package:flutter/material.dart';
@@ -16,23 +18,39 @@ void main() async {
 
   final sharedPreferences = await SharedPreferences.getInstance();
 
-  final RestaurantData restaurantData =
-      RestaurantData(sharedPreferences: sharedPreferences);
+  final RestaurantData restaurantData = RestaurantData();
   final RestaurantBloc restaurantBloc = RestaurantBloc(restaurantData);
+  final RestaurantSearchKeywordsData restaurantSearchKeywordsData =
+      RestaurantSearchKeywordsData(prefs: sharedPreferences);
+  final RestaurantSearchKeywordsCubit restaurantSearchKeywordsCubit =
+      RestaurantSearchKeywordsCubit(restaurantSearchKeywordsData);
 
-  runApp(RetasteApp(restaurantBloc: restaurantBloc));
+  runApp(RetasteApp(
+      restaurantBloc: restaurantBloc,
+      restaurantSearchKeywordsCubit: restaurantSearchKeywordsCubit));
 }
 
 class RetasteApp extends StatelessWidget {
   final RestaurantBloc restaurantBloc;
+  final RestaurantSearchKeywordsCubit restaurantSearchKeywordsCubit;
 
-  const RetasteApp({super.key, required this.restaurantBloc});
+  const RetasteApp(
+      {super.key,
+      required this.restaurantBloc,
+      required this.restaurantSearchKeywordsCubit});
 
   // This widget is the root of this application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => restaurantBloc,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => restaurantBloc,
+        ),
+        BlocProvider(
+          create: (context) => restaurantSearchKeywordsCubit,
+        ),
+      ],
       child: MaterialApp(
         title: 'Retaste',
         theme: theme,

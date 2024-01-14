@@ -7,20 +7,28 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:retaste_app/bloc/cubit/cubit/restaurant_search_keywords_cubit.dart';
 import 'package:retaste_app/bloc/restaurant_bloc.dart';
 
 import 'package:retaste_app/main.dart';
 import 'package:retaste_app/repository/restaurant_data.dart';
+import 'package:retaste_app/repository/restaurant_search_keywords_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   final sharedPreferences = await SharedPreferences.getInstance();
-  final RestaurantData restaurantData =
-      RestaurantData(sharedPreferences: sharedPreferences);
+  final RestaurantData restaurantData = RestaurantData();
   final RestaurantBloc restaurantBloc = RestaurantBloc(restaurantData);
+  final RestaurantSearchKeywordsData restaurantSearchKeywordsData =
+      RestaurantSearchKeywordsData(prefs: sharedPreferences);
+  final RestaurantSearchKeywordsCubit restaurantSearchKeywordsCubit =
+      RestaurantSearchKeywordsCubit(restaurantSearchKeywordsData);
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(RetasteApp(restaurantBloc: restaurantBloc));
+    await tester.pumpWidget(RetasteApp(
+      restaurantBloc: restaurantBloc,
+      restaurantSearchKeywordsCubit: restaurantSearchKeywordsCubit,
+    ));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

@@ -29,8 +29,6 @@ class RestaurantError extends RestaurantState {
   List<Object> get props => [errorMessage];
 }
 
-class RestaurantByQueryInitial extends RestaurantState {}
-
 class RestaurantByQueryLoading extends RestaurantState {}
 
 class RestaurantByQueryLoaded extends RestaurantState {
@@ -81,6 +79,17 @@ class RestaurantNavigatorActionState extends RestaurantActionState {
   final String id;
 
   RestaurantNavigatorActionState(this.id);
+
+  @override
+  List<Object> get props => [id];
+}
+
+abstract class RestaurantSearchActionState extends RestaurantState {}
+
+class RestaurantSearchNavigatorActionState extends RestaurantSearchActionState {
+  final String id;
+
+  RestaurantSearchNavigatorActionState(this.id);
 
   @override
   List<Object> get props => [id];
