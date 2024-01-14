@@ -35,6 +35,7 @@ class _RestaurantDetailInfoState extends State<RestaurantDetailInfo> {
     final mobileStarImgWidth = screenWidth / 9;
     final mobileStarImgHeight = screenHeight / 20;
     final mobileRatingWidth = screenWidth / 9;
+    final mobileCategorySizedBoxHeight = screenHeight / 35;
     final mobileContainerHeight = screenHeight / 3;
     final mobileExpandedContainerHeight = screenHeight / 1.8;
     const mobileContainerFlex = 1;
@@ -44,10 +45,11 @@ class _RestaurantDetailInfoState extends State<RestaurantDetailInfo> {
     double starImgWidth = screenWidth / 20;
     double starImgHeight = screenHeight / 10;
     double ratingWidth = screenWidth / 20;
-    double containerHeight = screenHeight / 1.8;
-    double expandedContainerHeight = screenHeight / 1.2;
-    int containerFlex = 2;
-    int expandedContainerFlex = 2;
+    double categorySizedBoxHeight = screenHeight / 20;
+    double containerHeight = screenHeight / 1.6;
+    double expandedContainerHeight = screenHeight;
+    int containerFlex = 1;
+    int expandedContainerFlex = 3;
 
     if (ResponsiveBreakpoints.of(context).smallerOrEqualTo(MOBILE)) {
       containerHeight = mobileContainerHeight;
@@ -56,6 +58,7 @@ class _RestaurantDetailInfoState extends State<RestaurantDetailInfo> {
       starImgWidth = mobileStarImgWidth;
       starImgHeight = mobileStarImgHeight;
       ratingWidth = mobileRatingWidth;
+      categorySizedBoxHeight = mobileCategorySizedBoxHeight;
       containerFlex = mobileContainerFlex;
       expandedContainerFlex = mobileExpandedContainerFlex;
     }
@@ -117,7 +120,7 @@ class _RestaurantDetailInfoState extends State<RestaurantDetailInfo> {
           child: Padding(
             padding: const EdgeInsets.only(left: 20),
             child: SizedBox(
-              height: screenHeight / 35,
+              height: categorySizedBoxHeight,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: widget.categoryName.length,

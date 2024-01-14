@@ -35,15 +35,24 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
+    const mobileTextFieldFlex = 20;
+    const mobileSearchHistoryTitleFlex = 3;
+    const mobileChipButtonFlex = 4;
     final mobileBgImageHeight = screenHeight / 5;
     final mobileTextFieldHeight = screenHeight / 15;
     final mobileChipButtonHeight = screenHeight / 30;
 
+    int textFieldFlex = 10;
+    int searchHistoryTitleFlex = 4;
+    int chipButtonFlex = 6;
     double bgImageHeight = screenHeight / 4;
     double textFieldHeight = screenHeight / 7;
     double chipButtonHeight = screenHeight / 15;
 
     if (ResponsiveBreakpoints.of(context).smallerOrEqualTo(MOBILE)) {
+      textFieldFlex = mobileTextFieldFlex;
+      searchHistoryTitleFlex = mobileSearchHistoryTitleFlex;
+      chipButtonFlex = mobileChipButtonFlex;
       bgImageHeight = mobileBgImageHeight;
       textFieldHeight = mobileTextFieldHeight;
       chipButtonHeight = mobileChipButtonHeight;
@@ -88,7 +97,7 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Flexible(
-                  flex: 16,
+                  flex: textFieldFlex,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: SizedBox(
@@ -149,7 +158,7 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
                   ),
                 ),
                 Flexible(
-                  flex: 3,
+                  flex: searchHistoryTitleFlex,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20, top: 20),
                     child: SizedBox(
@@ -163,7 +172,7 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
                   ),
                 ),
                 Flexible(
-                  flex: 5,
+                  flex: chipButtonFlex,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: BlocConsumer<RestaurantSearchKeywordsCubit,

@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:retaste_app/bloc/restaurant_bloc.dart';
 import 'package:retaste_app/widget/restaurant_list_item.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,14 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+
+    final mobileCircularProgressIndicatorHeight = screenHeight / 20;
+
+    double circularProgressIndicatorHeight = screenHeight / 10;
+
+    if (ResponsiveBreakpoints.of(context).smallerOrEqualTo(MOBILE)) {
+      circularProgressIndicatorHeight = mobileCircularProgressIndicatorHeight;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -91,7 +100,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
               if (state is RestaurantLoading) {
                 return Center(
                   child: SizedBox(
-                    height: screenHeight / 20,
+                    height: circularProgressIndicatorHeight,
                     child: const CircularProgressIndicator(),
                   ),
                 );

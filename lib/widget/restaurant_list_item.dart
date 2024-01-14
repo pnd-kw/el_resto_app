@@ -28,7 +28,7 @@ class RestaurantListItem extends StatelessWidget {
     final mobileTitleHeight = screenHeight / 12;
     final mobileIconContainerHeight = screenHeight / 30;
     final mobileStarIconContainerWidth = screenWidth / 6;
-    final mobilePinIconContainerWidth = screenWidth / 3;
+    final mobilePinIconContainerWidth = screenWidth / 2;
 
     double cardHeight = screenHeight * 1.25;
     double bgTextBoxHeight = screenHeight / 3;
@@ -36,11 +36,10 @@ class RestaurantListItem extends StatelessWidget {
     double titleHeight = screenHeight / 5;
     double iconContainerHeight = screenHeight / 10;
     double starIconContainerWidth = screenWidth / 8;
-    double pinIconContainerWidth = screenWidth / 5;
+    double pinIconContainerWidth = screenWidth / 3;
 
     if (ResponsiveBreakpoints.of(context).smallerOrEqualTo(MOBILE)) {
       cardHeight = mobileCardHeight;
-
       bgTextBoxHeight = mobileTextBoxHeight;
       textBoxHeight = mobileTextBoxHeight;
       titleHeight = mobileTitleHeight;

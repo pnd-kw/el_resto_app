@@ -35,11 +35,14 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
 
+    final mobileCircularProgressIndicatorHeight = screenHeight / 20;
     final mobileExpandedHeight = screenHeight / 3;
 
+    double circularProgressIndicatorHeight = screenHeight / 10;
     double expandedHeight = screenHeight / 1.5;
 
     if (ResponsiveBreakpoints.of(context).smallerOrEqualTo(MOBILE)) {
+      circularProgressIndicatorHeight = mobileCircularProgressIndicatorHeight;
       expandedHeight = mobileExpandedHeight;
     }
 
@@ -49,7 +52,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
           if (state is RestaurantDetailLoading) {
             return Center(
               child: SizedBox(
-                height: screenHeight / 20,
+                height: circularProgressIndicatorHeight,
                 child: const CircularProgressIndicator(),
               ),
             );

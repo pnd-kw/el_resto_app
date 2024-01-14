@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class CustomerReviewItem extends StatelessWidget {
   final String name;
@@ -17,12 +18,30 @@ class CustomerReviewItem extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
+    // final mobileImgSizedBoxWidth = screenWidth / 4;
+    final mobileContentSizedBoxHeight = screenHeight / 6;
+    final mobileImgSizedBoxWidth = screenWidth / 4;
+    final mobileImgSizedBoxHeight = screenHeight / 10;
+    final mobileReviewInfoSizedBoxHeight = screenHeight / 8;
+
+    double contentSizedBoxHeight = screenHeight / 3;
+    double imgSizedBoxWidth = screenWidth / 6;
+    double imgSizedBoxHeight = screenHeight / 3;
+    double reviewInfoSizedBoxHeight = screenHeight / 3;
+
+    if (ResponsiveBreakpoints.of(context).smallerOrEqualTo(MOBILE)) {
+      contentSizedBoxHeight = mobileContentSizedBoxHeight;
+      imgSizedBoxWidth = mobileImgSizedBoxWidth;
+      imgSizedBoxHeight = mobileImgSizedBoxHeight;
+      reviewInfoSizedBoxHeight = mobileReviewInfoSizedBoxHeight;
+    }
+
     return Column(
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: SizedBox(
-            height: screenHeight / 6,
+            height: contentSizedBoxHeight,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -31,8 +50,8 @@ class CustomerReviewItem extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.center,
                     child: SizedBox(
-                      width: screenWidth / 4,
-                      height: screenHeight / 10,
+                      width: imgSizedBoxWidth,
+                      height: imgSizedBoxHeight,
                       child: ClipOval(
                         child: Image.asset(
                           'assets/images/profile-img-placeholder.jpg',
@@ -47,7 +66,7 @@ class CustomerReviewItem extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20),
                     child: SizedBox(
-                      height: screenHeight / 8,
+                      height: reviewInfoSizedBoxHeight,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [

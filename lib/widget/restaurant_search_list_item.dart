@@ -23,15 +23,21 @@ class RestaurantSearchListItem extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
+    final mobileCardSizedBoxHeight = screenHeight / 5;
+    final mobileImgContainerHeight = screenHeight / 6;
     final mobileIconContainerHeight = screenHeight / 30;
     final mobileStarIconContainerWidth = screenWidth / 6;
     final mobilePinIconContainerWidth = screenWidth / 4;
 
+    double cardSizedBoxHeight = screenHeight / 2;
+    double imgContainerHeight = screenHeight / 3;
     double iconContainerHeight = screenHeight / 10;
     double starIconContainerWidth = screenWidth / 8;
-    double pinIconContainerWidth = screenWidth / 5;
+    double pinIconContainerWidth = screenWidth / 4;
 
     if (ResponsiveBreakpoints.of(context).smallerOrEqualTo(MOBILE)) {
+      cardSizedBoxHeight = mobileCardSizedBoxHeight;
+      imgContainerHeight = mobileImgContainerHeight;
       iconContainerHeight = mobileIconContainerHeight;
       starIconContainerWidth = mobileStarIconContainerWidth;
       pinIconContainerWidth = mobilePinIconContainerWidth;
@@ -42,7 +48,7 @@ class RestaurantSearchListItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: SizedBox(
-        height: screenHeight / 5,
+        height: cardSizedBoxHeight,
         child: Row(
           children: [
             Flexible(
@@ -51,7 +57,7 @@ class RestaurantSearchListItem extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                 child: Container(
-                  height: screenHeight / 6,
+                  height: imgContainerHeight,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                         image: NetworkImage(

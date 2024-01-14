@@ -39,15 +39,18 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
     final screenHeight = MediaQuery.of(context).size.height;
     // final restaurantBloc = BlocProvider.of<RestaurantBloc>(context);
 
+    final mobileCircularProgressIndicatorHeight = screenHeight / 20;
     const mobileTextFieldFlex = 1;
     final mobileBgImageHeight = screenHeight / 5;
     final mobileTextFieldHeight = screenHeight / 15;
 
+    double circularProgressIndicatorHeight = screenHeight / 10;
     int textFieldFlex = 4;
     double bgImageHeight = screenHeight / 4;
     double textFieldHeight = screenHeight / 7;
 
     if (ResponsiveBreakpoints.of(context).smallerOrEqualTo(MOBILE)) {
+      circularProgressIndicatorHeight = mobileCircularProgressIndicatorHeight;
       textFieldFlex = mobileTextFieldFlex;
       bgImageHeight = mobileBgImageHeight;
       textFieldHeight = mobileTextFieldHeight;
@@ -148,7 +151,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         if (state is RestaurantByQueryLoading) {
                           return Center(
                             child: SizedBox(
-                              height: screenHeight / 20,
+                              height: circularProgressIndicatorHeight,
                               child: const CircularProgressIndicator(),
                             ),
                           );
