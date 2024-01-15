@@ -96,9 +96,12 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                     flexibleSpace: FlexibleSpaceBar(
                       background: AspectRatio(
                         aspectRatio: 16 / 9,
-                        child: Image.network(
-                          'https://restaurant-api.dicoding.dev/images/medium/$image',
-                          fit: BoxFit.cover,
+                        child: Hero(
+                          tag: 'restaurantImage_$restaurantId',
+                          child: Image.network(
+                            'https://restaurant-api.dicoding.dev/images/medium/$image',
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),

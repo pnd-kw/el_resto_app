@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class RestaurantListItem extends StatelessWidget {
+  final String restaurantId;
   final String name;
   final String description;
   final String image;
@@ -11,6 +12,7 @@ class RestaurantListItem extends StatelessWidget {
 
   const RestaurantListItem({
     super.key,
+    required this.restaurantId,
     required this.name,
     required this.description,
     required this.image,
@@ -85,16 +87,19 @@ class RestaurantListItem extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 5),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                      'https://restaurant-api.dicoding.dev/images/small/$image'),
-                                  fit: BoxFit.cover,
-                                ),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(200),
-                                  topRight: Radius.circular(200),
+                            child: Hero(
+                              tag: 'restaurantImage_$restaurantId',
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                        'https://restaurant-api.dicoding.dev/images/small/$image'),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(200),
+                                    topRight: Radius.circular(200),
+                                  ),
                                 ),
                               ),
                             ),

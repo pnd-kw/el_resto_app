@@ -13,7 +13,6 @@ class RestaurantListScreen extends StatefulWidget {
 
 class _RestaurantListScreenState extends State<RestaurantListScreen> {
   late RestaurantBloc _restaurantBloc;
-  // bool _isSearching = false;
 
   @override
   void initState() {
@@ -36,25 +35,6 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        // title: _isSearching
-        //     ? SizedBox(
-        //         height: screenHeight / 20,
-        //         child: TextField(
-        //           decoration: InputDecoration(
-        //               hintText: 'search restaurant name or menu here...',
-        //               hintStyle: Theme.of(context)
-        //                   .textTheme
-        //                   .bodySmall!
-        //                   .copyWith(
-        //                       color:
-        //                           Theme.of(context).colorScheme.onBackground),
-        //               enabledBorder: OutlineInputBorder(
-        //                 borderSide: const BorderSide(width: 1),
-        //                 borderRadius: BorderRadius.circular(10),
-        //               )),
-        //         ),
-        //       )
-        //     :
         title: Text(
           'Retaste',
           style: Theme.of(context)
@@ -67,9 +47,6 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
             height: screenHeight / 12,
             child: IconButton(
               onPressed: () {
-                // setState(() {
-                //   _isSearching = !_isSearching;
-                // });
                 Navigator.of(context).pushNamed('/restaurant-search-screen');
               },
               icon: const Icon(Icons.search),
@@ -115,6 +92,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                             .add(RestaurantNavigatorActionEvent(restaurantId));
                       },
                       child: RestaurantListItem(
+                        restaurantId: state.restaurants[index].id,
                         name: state.restaurants[index].name,
                         description: state.restaurants[index].description,
                         image: state.restaurants[index].pictureId,

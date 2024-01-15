@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
-class SearchResultArguments {
-  final GlobalKey<FormFieldState<String>> textFieldKey;
-  final TextEditingController textSearchController;
+// class SearchResultArguments {
+//   final GlobalKey<FormFieldState<String>> textFieldKey;
+//   final TextEditingController textSearchController;
 
-  SearchResultArguments({
-    required this.textFieldKey,
-    required this.textSearchController,
-  });
-}
+//   SearchResultArguments({
+//     required this.textFieldKey,
+//     required this.textSearchController,
+//   });
+// }

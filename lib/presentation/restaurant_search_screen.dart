@@ -15,13 +15,6 @@ class RestaurantSearchScreen extends StatefulWidget {
 class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
   late RestaurantSearchKeywordsCubit restaurantSearchKeywordsCubit;
 
-  // @override
-  // void initState() {
-  //   final restaurantSearchKeywordsCubit =
-  //       BlocProvider.of<RestaurantSearchKeywordsCubit>(context);
-  //   restaurantSearchKeywordsCubit.loadSearchKeywords();
-  //   super.initState();
-  // }
   @override
   void initState() {
     restaurantSearchKeywordsCubit =
@@ -40,7 +33,7 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
     const mobileChipButtonFlex = 4;
     final mobileBgImageHeight = screenHeight / 5;
     final mobileTextFieldHeight = screenHeight / 15;
-    final mobileChipButtonHeight = screenHeight / 30;
+    final mobileChipButtonHeight = screenHeight / 20;
 
     int textFieldFlex = 10;
     int searchHistoryTitleFlex = 4;
@@ -84,7 +77,6 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
           ),
           Center(
             child: SizedBox(
-              // height: screenHeight / 5,
               height: bgImageHeight,
               child: Image.asset('assets/images/search-placeholder.png'),
             ),
@@ -101,7 +93,6 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: SizedBox(
-                      // height: screenHeight / 15,
                       height: textFieldHeight,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -163,7 +154,7 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
                     padding: const EdgeInsets.only(left: 20, top: 20),
                     child: SizedBox(
                       child: Text(
-                        'Your search history',
+                        'Your history',
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             color: Theme.of(context).colorScheme.onBackground),
                         textAlign: TextAlign.start,
@@ -184,6 +175,8 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
                       listener: (context, state) {
                         if (state
                             is RestaurantSearchKeywordNavigatorActionState) {
+                          restaurantSearchKeywordsCubit
+                              .saveSearchKeyword(state.keyword);
                           restaurantBloc
                               .add(FetchRestaurantByQuery(state.keyword));
                           Navigator.push(
@@ -271,22 +264,4 @@ Widget buildChipButton(double width, double height, void Function()? onTap,
           ),
         ),
       ),
-      // child: ElevatedButton(
-      //   onPressed: onPressed,
-      //   style: ElevatedButton.styleFrom(
-      //     backgroundColor: Theme.of(context).colorScheme.primary,
-      //     shape: RoundedRectangleBorder(
-      //       borderRadius: BorderRadius.circular(20),
-      //     ),
-      //   ),
-      //   child: Text(
-      //     keyword,
-      //     style: Theme.of(context)
-      //         .textTheme
-      //         .labelSmall!
-      //         .copyWith(color: Theme.of(context).colorScheme.background),
-      //     textAlign: TextAlign.center,
-      //     overflow: TextOverflow.ellipsis,
-      //   ),
-      // ),
     );

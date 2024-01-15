@@ -18,7 +18,6 @@ class CustomerReviewItem extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
-    // final mobileImgSizedBoxWidth = screenWidth / 4;
     final mobileContentSizedBoxHeight = screenHeight / 6;
     final mobileImgSizedBoxWidth = screenWidth / 4;
     final mobileImgSizedBoxHeight = screenHeight / 10;
@@ -75,7 +74,6 @@ class CustomerReviewItem extends StatelessWidget {
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  // 'John Doe',
                                   name,
                                   style: Theme.of(context)
                                       .textTheme
@@ -92,7 +90,6 @@ class CustomerReviewItem extends StatelessWidget {
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  // '29 Desember 2023',
                                   date,
                                   style: Theme.of(context)
                                       .textTheme
@@ -109,7 +106,6 @@ class CustomerReviewItem extends StatelessWidget {
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  // 'Makanan nya enak, banyak pilihan menu, harga cukup bersahabat!',
                                   review,
                                   style: Theme.of(context)
                                       .textTheme
