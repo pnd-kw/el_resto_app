@@ -11,23 +11,23 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
   final RestaurantData _restaurantData;
 
   RestaurantBloc(this._restaurantData) : super(RestaurantInitial()) {
-    on<FetchRestaurant>((event, emit) => addDataToState(emit));
+    on<FetchRestaurant>((event, emit) => fetchRestaurant(emit));
     on<FetchRestaurantByQuery>(
-        (event, emit) => getRestaurantByQuery(emit, event.query));
+        (event, emit) => fetchRestaurantByQuery(emit, event.query));
     on<RestaurantSearchNavigatorActionEvent>(
         (event, emit) => restaurantSearchNavigator(emit, event.id));
     on<RestaurantNavigatorActionEvent>(
         (event, emit) => restaurantNavigator(emit, event.id));
     on<FetchRestaurantDetail>(
-        (event, emit) => getRestaurantDetail(emit, event.id));
+        (event, emit) => fetchRestaurantDetail(emit, event.id));
   }
 
-  Future<void> addDataToState(Emitter<RestaurantState> emit) async {
+  Future<void> fetchRestaurant(Emitter<RestaurantState> emit) async {
     try {
       emit(RestaurantLoading());
 
       final List<Restaurant> restaurantData =
-          await _restaurantData.getRestaurantData();
+          await _restaurantData.fetchRestaurantData();
 
       emit(RestaurantLoaded(restaurantData));
     } catch (e) {
@@ -35,7 +35,7 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
     }
   }
 
-  Future<void> getRestaurantByQuery(
+  Future<void> fetchRestaurantByQuery(
       Emitter<RestaurantState> emit, String query) async {
     try {
       emit(RestaurantByQueryLoading());
@@ -53,7 +53,7 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
     }
   }
 
-  Future<void> getRestaurantDetail(
+  Future<void> fetchRestaurantDetail(
       Emitter<RestaurantState> emit, String id) async {
     try {
       emit(RestaurantDetailLoading());

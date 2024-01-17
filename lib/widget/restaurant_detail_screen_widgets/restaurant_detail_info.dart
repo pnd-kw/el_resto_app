@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:retaste_app/utils/layout/default_layout.dart';
+import 'package:retaste_app/widget/restaurant_detail_screen_widgets/custom_text_button.dart';
+import 'package:retaste_app/widget/restaurant_detail_screen_widgets/info_content.dart';
+import 'package:retaste_app/widget/restaurant_detail_screen_widgets/info_title.dart';
 
 class RestaurantDetailInfo extends StatefulWidget {
   final String name;
@@ -30,37 +34,29 @@ class _RestaurantDetailInfoState extends State<RestaurantDetailInfo> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    final defaultSize =
+        DefaultSize(screenWidth: screenWidth, screenHeight: screenHeight);
 
-    final mobileTitleContainerHeight = screenHeight / 15;
-    final mobileStarImgWidth = screenWidth / 9;
-    final mobileStarImgHeight = screenHeight / 20;
-    final mobileRatingWidth = screenWidth / 9;
-    final mobileCategorySizedBoxHeight = screenHeight / 35;
-    final mobileContainerHeight = screenHeight / 3;
-    final mobileExpandedContainerHeight = screenHeight / 1.8;
-    const mobileContainerFlex = 1;
-    const mobileExpandedContainerFlex = 9;
+    double titleContainerHeight = defaultSize.titleContainerHeight!;
+    double starImgWidth = defaultSize.starImgWidth!;
+    double starImgHeight = defaultSize.starImgHeight!;
+    double ratingWidth = defaultSize.ratingWidth!;
+    double categorySizedBoxHeight = defaultSize.categorySizedBoxHeight!;
+    double containerHeight = defaultSize.containerHeight!;
+    double expandedContainerHeight = defaultSize.expandedContainerHeight!;
+    int containerFlex = defaultSize.containerFlex!;
+    int expandedContainerFlex = defaultSize.expandedContainerFlex!;
 
-    double titleContainerHeight = screenHeight / 8;
-    double starImgWidth = screenWidth / 20;
-    double starImgHeight = screenHeight / 10;
-    double ratingWidth = screenWidth / 20;
-    double categorySizedBoxHeight = screenHeight / 20;
-    double containerHeight = screenHeight / 1.6;
-    double expandedContainerHeight = screenHeight;
-    int containerFlex = 1;
-    int expandedContainerFlex = 3;
-
-    if (ResponsiveBreakpoints.of(context).smallerOrEqualTo(MOBILE)) {
-      containerHeight = mobileContainerHeight;
-      expandedContainerHeight = mobileExpandedContainerHeight;
-      titleContainerHeight = mobileTitleContainerHeight;
-      starImgWidth = mobileStarImgWidth;
-      starImgHeight = mobileStarImgHeight;
-      ratingWidth = mobileRatingWidth;
-      categorySizedBoxHeight = mobileCategorySizedBoxHeight;
-      containerFlex = mobileContainerFlex;
-      expandedContainerFlex = mobileExpandedContainerFlex;
+    if (ResponsiveBreakpoints.of(context).largerThan(MOBILE)) {
+      titleContainerHeight = screenHeight / 8;
+      starImgWidth = screenWidth / 20;
+      starImgHeight = screenHeight / 10;
+      ratingWidth = screenWidth / 20;
+      categorySizedBoxHeight = screenHeight / 20;
+      containerHeight = screenHeight / 1.6;
+      expandedContainerHeight = screenHeight;
+      containerFlex = 1;
+      expandedContainerFlex = 3;
     }
 
     return Column(
@@ -163,12 +159,10 @@ class _RestaurantDetailInfoState extends State<RestaurantDetailInfo> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  buildInfoTitle(
-                      context, 'About', const Icon(Icons.restaurant)),
-                  buildInfoContent(
-                      context,
-                      isExpanded ? expandedContainerFlex : containerFlex,
-                      Text(
+                  const InfoTitle(title: 'About', icon: Icon(Icons.restaurant)),
+                  InfoContent(
+                      flex: isExpanded ? expandedContainerFlex : containerFlex,
+                      text: Text(
                         widget.description,
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             color: Theme.of(context).colorScheme.onBackground),
@@ -176,10 +170,9 @@ class _RestaurantDetailInfoState extends State<RestaurantDetailInfo> {
                         maxLines: isExpanded ? null : 2,
                         overflow: isExpanded ? null : TextOverflow.ellipsis,
                       )),
-                  buildTextButton(
-                    context,
-                    1,
-                    TextButton(
+                  CustomTextButton(
+                    flex: 1,
+                    textButton: TextButton(
                         onPressed: () {
                           setState(() {
                             isExpanded = !isExpanded;
@@ -194,22 +187,20 @@ class _RestaurantDetailInfoState extends State<RestaurantDetailInfo> {
                                   color: Theme.of(context).colorScheme.primary),
                         )),
                   ),
-                  buildInfoTitle(
-                      context, 'City', const Icon(Icons.location_city_rounded)),
-                  buildInfoContent(
-                      context,
-                      1,
-                      Text(
+                  const InfoTitle(
+                      title: 'City', icon: Icon(Icons.location_city_rounded)),
+                  InfoContent(
+                      flex: 1,
+                      text: Text(
                         widget.city,
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             color: Theme.of(context).colorScheme.onBackground),
                       )),
-                  buildInfoTitle(
-                      context, 'Address', const Icon(Icons.pin_drop_rounded)),
-                  buildInfoContent(
-                      context,
-                      1,
-                      Text(
+                  const InfoTitle(
+                      title: 'Address', icon: Icon(Icons.pin_drop_rounded)),
+                  InfoContent(
+                      flex: 1,
+                      text: Text(
                         widget.address,
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             color: Theme.of(context).colorScheme.onBackground),
@@ -224,43 +215,43 @@ class _RestaurantDetailInfoState extends State<RestaurantDetailInfo> {
   }
 }
 
-Widget buildInfoTitle(BuildContext context, String title, Widget icon) =>
-    Flexible(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Flexible(child: icon),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Text(
-                  title,
-                  style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                      color: Theme.of(context).colorScheme.onBackground),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+// Widget buildInfoTitle(BuildContext context, String title, Widget icon) =>
+//     Flexible(
+//       child: Padding(
+//         padding: const EdgeInsets.only(left: 20, right: 20),
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.start,
+//           children: [
+//             Flexible(child: icon),
+//             Expanded(
+//               child: Padding(
+//                 padding: const EdgeInsets.only(left: 10),
+//                 child: Text(
+//                   title,
+//                   style: Theme.of(context).textTheme.labelSmall!.copyWith(
+//                       color: Theme.of(context).colorScheme.onBackground),
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
 
-Widget buildInfoContent(BuildContext context, int flex, Widget text) =>
-    Expanded(
-      flex: flex,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 55, right: 20),
-        child: text,
-      ),
-    );
+// Widget buildInfoContent(BuildContext context, int flex, Widget text) =>
+//     Expanded(
+//       flex: flex,
+//       child: Padding(
+//         padding: const EdgeInsets.only(left: 55, right: 20),
+//         child: text,
+//       ),
+//     );
 
-Widget buildTextButton(BuildContext context, int flex, TextButton textButton) =>
-    Flexible(
-      flex: flex,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 40, right: 20),
-        child: textButton,
-      ),
-    );
+// Widget buildTextButton(BuildContext context, int flex, TextButton textButton) =>
+//     Flexible(
+//       flex: flex,
+//       child: Padding(
+//         padding: const EdgeInsets.only(left: 40, right: 20),
+//         child: textButton,
+//       ),
+//     );

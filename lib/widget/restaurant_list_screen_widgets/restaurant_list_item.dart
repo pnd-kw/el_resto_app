@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:retaste_app/utils/layout/default_layout.dart';
+import 'package:retaste_app/widget/restaurant_list_screen_widgets/textbox.dart';
 
 class RestaurantListItem extends StatelessWidget {
   final String restaurantId;
@@ -24,30 +26,25 @@ class RestaurantListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    final defaultSize =
+        DefaultSize(screenWidth: screenWidth, screenHeight: screenHeight);
 
-    final mobileCardHeight = screenHeight / 2;
-    final mobileTextBoxHeight = screenHeight / 6;
-    final mobileTitleHeight = screenHeight / 12;
-    final mobileIconContainerHeight = screenHeight / 30;
-    final mobileStarIconContainerWidth = screenWidth / 6;
-    final mobilePinIconContainerWidth = screenWidth / 2;
+    double cardHeight = defaultSize.cardHeight!;
+    double bgTextBoxHeight = defaultSize.textBoxHeight!;
+    double textBoxHeight = defaultSize.textBoxHeight!;
+    double titleHeight = defaultSize.titleHeight!;
+    double iconContainerHeight = defaultSize.iconContainerHeight!;
+    double starIconContainerWidth = defaultSize.starIconContainerWidth!;
+    double pinIconContainerWidth = defaultSize.pinIconContainerWidth!;
 
-    double cardHeight = screenHeight * 1.25;
-    double bgTextBoxHeight = screenHeight / 3;
-    double textBoxHeight = screenHeight / 3;
-    double titleHeight = screenHeight / 5;
-    double iconContainerHeight = screenHeight / 10;
-    double starIconContainerWidth = screenWidth / 8;
-    double pinIconContainerWidth = screenWidth / 3;
-
-    if (ResponsiveBreakpoints.of(context).smallerOrEqualTo(MOBILE)) {
-      cardHeight = mobileCardHeight;
-      bgTextBoxHeight = mobileTextBoxHeight;
-      textBoxHeight = mobileTextBoxHeight;
-      titleHeight = mobileTitleHeight;
-      iconContainerHeight = mobileIconContainerHeight;
-      starIconContainerWidth = mobileStarIconContainerWidth;
-      pinIconContainerWidth = mobilePinIconContainerWidth;
+    if (ResponsiveBreakpoints.of(context).largerThan(MOBILE)) {
+      cardHeight = screenHeight * 1.25;
+      bgTextBoxHeight = screenHeight / 3;
+      textBoxHeight = screenHeight / 3;
+      titleHeight = screenHeight / 5;
+      iconContainerHeight = screenHeight / 10;
+      starIconContainerWidth = screenWidth / 8;
+      pinIconContainerWidth = screenWidth / 3;
     }
 
     return Card(
@@ -114,15 +111,17 @@ class RestaurantListItem extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 25, top: 25, right: 15, bottom: 15),
-                          child: buildTextBox(
-                            height: bgTextBoxHeight,
-                            color: Colors.white,
-                          ),
+                          // child: buildTextBox(
+                          //   height: bgTextBoxHeight,
+                          //   color: Colors.white,
+                          // ),
+                          child: TextBox(
+                              height: bgTextBoxHeight, color: Colors.white),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 20, horizontal: 20),
-                          child: buildTextBox(
+                          child: TextBox(
                             height: textBoxHeight,
                             color: Colors.grey.shade300,
                             child: Column(
@@ -280,17 +279,17 @@ class RestaurantListItem extends StatelessWidget {
   }
 }
 
-Widget buildTextBox(
-        {required double height, required Color color, Widget? child}) =>
-    Container(
-      height: height,
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(20),
-          bottomRight: Radius.circular(20),
-        ),
-        border: Border.all(width: 1.0),
-      ),
-      child: child,
-    );
+// Widget buildTextBox(
+//         {required double height, required Color color, Widget? child}) =>
+//     Container(
+//       height: height,
+//       decoration: BoxDecoration(
+//         color: color,
+//         borderRadius: const BorderRadius.only(
+//           bottomLeft: Radius.circular(20),
+//           bottomRight: Radius.circular(20),
+//         ),
+//         border: Border.all(width: 1.0),
+//       ),
+//       child: child,
+//     );

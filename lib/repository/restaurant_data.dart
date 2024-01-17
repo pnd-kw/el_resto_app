@@ -1,15 +1,16 @@
+import 'api.dart';
 import 'package:dio/dio.dart';
 import 'package:retaste_app/model/restaurant_detail.dart';
 import 'package:retaste_app/model/restaurant.dart';
 
 class RestaurantData {
-  final baseUrl = 'https://restaurant-api.dicoding.dev';
+  // final baseUrl =
 
-  final getRestaurant = '/list';
-  final getRestaurantDetail = '/detail/';
-  final searchRestaurant = '/search?q=';
+  // final getRestaurant = '/list';
+  // final getRestaurantDetail = '/detail/';
+  // final searchRestaurant = '/search?q=';
 
-  Future<List<Restaurant>> getRestaurantData() async {
+  Future<List<Restaurant>> fetchRestaurantData() async {
     try {
       var dio = Dio();
       final response = await dio.get('$baseUrl$getRestaurant');

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:retaste_app/utils/layout/default_layout.dart';
 
 class CustomerReviewItem extends StatelessWidget {
   final String name;
@@ -17,22 +18,19 @@ class CustomerReviewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
+    final defaultSize =
+        DefaultSize(screenWidth: screenWidth, screenHeight: screenHeight);
 
-    final mobileContentSizedBoxHeight = screenHeight / 6;
-    final mobileImgSizedBoxWidth = screenWidth / 4;
-    final mobileImgSizedBoxHeight = screenHeight / 10;
-    final mobileReviewInfoSizedBoxHeight = screenHeight / 8;
+    double contentSizedBoxHeight = defaultSize.contentSizedBoxHeight!;
+    double imgSizedBoxWidth = defaultSize.imgSizedBoxWidth!;
+    double imgSizedBoxHeight = defaultSize.imgSizedboxHeight!;
+    double reviewInfoSizedBoxHeight = defaultSize.reviewInfoSizedBoxHeight!;
 
-    double contentSizedBoxHeight = screenHeight / 3;
-    double imgSizedBoxWidth = screenWidth / 6;
-    double imgSizedBoxHeight = screenHeight / 3;
-    double reviewInfoSizedBoxHeight = screenHeight / 3;
-
-    if (ResponsiveBreakpoints.of(context).smallerOrEqualTo(MOBILE)) {
-      contentSizedBoxHeight = mobileContentSizedBoxHeight;
-      imgSizedBoxWidth = mobileImgSizedBoxWidth;
-      imgSizedBoxHeight = mobileImgSizedBoxHeight;
-      reviewInfoSizedBoxHeight = mobileReviewInfoSizedBoxHeight;
+    if (ResponsiveBreakpoints.of(context).largerThan(MOBILE)) {
+      contentSizedBoxHeight = screenHeight / 3;
+      imgSizedBoxWidth = screenWidth / 6;
+      imgSizedBoxHeight = screenHeight / 3;
+      reviewInfoSizedBoxHeight = screenHeight / 3;
     }
 
     return Column(

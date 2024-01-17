@@ -1,8 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retaste_app/bloc/restaurant_bloc.dart';
-import 'package:retaste_app/widget/customer_review_item.dart';
-import 'package:retaste_app/widget/restaurant_detail_info.dart';
-import 'package:retaste_app/widget/restaurant_menu_item.dart';
+import 'package:retaste_app/utils/layout/default_layout.dart';
+import 'package:retaste_app/widget/restaurant_detail_screen_widgets/customer_review_item.dart';
+import 'package:retaste_app/widget/restaurant_detail_screen_widgets/menu.dart';
+import 'package:retaste_app/widget/restaurant_detail_screen_widgets/restaurant_detail_info.dart';
+import 'package:retaste_app/widget/restaurant_detail_screen_widgets/restaurant_menu_item.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 
@@ -33,17 +35,18 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    final defaultSize =
+        DefaultSize(screenWidth: screenWidth, screenHeight: screenHeight);
 
-    final mobileCircularProgressIndicatorHeight = screenHeight / 20;
-    final mobileExpandedHeight = screenHeight / 3;
+    double circularProgressIndicatorHeight =
+        defaultSize.circularProgressIndicatorHeight!;
+    double expandedHeight = defaultSize.expandedHeight!;
 
-    double circularProgressIndicatorHeight = screenHeight / 10;
-    double expandedHeight = screenHeight / 1.5;
-
-    if (ResponsiveBreakpoints.of(context).smallerOrEqualTo(MOBILE)) {
-      circularProgressIndicatorHeight = mobileCircularProgressIndicatorHeight;
-      expandedHeight = mobileExpandedHeight;
+    if (ResponsiveBreakpoints.of(context).largerThan(MOBILE)) {
+      circularProgressIndicatorHeight = screenHeight / 10;
+      expandedHeight = screenHeight / 1.5;
     }
 
     return Scaffold(
@@ -121,21 +124,19 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                     ),
                   ),
                   SliverToBoxAdapter(
-                    child: buildMenu(
-                      context,
-                      'Foods',
-                      state.restaurantDetail.menus.foods.length,
-                      (context, index) => RestaurantMenuItem(
+                    child: Menu(
+                      title: 'Foods',
+                      itemCount: state.restaurantDetail.menus.foods.length,
+                      itemBuilder: (context, index) => RestaurantMenuItem(
                           menuTitle:
                               state.restaurantDetail.menus.foods[index].name),
                     ),
                   ),
                   SliverToBoxAdapter(
-                    child: buildMenu(
-                      context,
-                      'Drinks',
-                      state.restaurantDetail.menus.drinks.length,
-                      (context, index) => RestaurantMenuItem(
+                    child: Menu(
+                      title: 'Drinks',
+                      itemCount: state.restaurantDetail.menus.drinks.length,
+                      itemBuilder: (context, index) => RestaurantMenuItem(
                           menuTitle:
                               state.restaurantDetail.menus.drinks[index].name),
                     ),
@@ -189,30 +190,30 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
   }
 }
 
-Widget buildMenu(BuildContext context, String title, int itemCount,
-        Widget Function(BuildContext, int) itemBuilder) =>
-    Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          child: SizedBox(
-            width: double.infinity,
-            child: Text(
-              title,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge!
-                  .copyWith(color: Theme.of(context).colorScheme.onBackground),
-            ),
-          ),
-        ),
-        SizedBox(
-          width: double.infinity,
-          height: 200,
-          child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: itemCount,
-              itemBuilder: itemBuilder),
-        ),
-      ],
-    );
+// Widget buildMenu(BuildContext context, String title, int itemCount,
+//         Widget Function(BuildContext, int) itemBuilder) =>
+//     Column(
+//       children: [
+//         Padding(
+//           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+//           child: SizedBox(
+//             width: double.infinity,
+//             child: Text(
+//               title,
+//               style: Theme.of(context)
+//                   .textTheme
+//                   .titleLarge!
+//                   .copyWith(color: Theme.of(context).colorScheme.onBackground),
+//             ),
+//           ),
+//         ),
+//         SizedBox(
+//           width: double.infinity,
+//           height: 200,
+//           child: ListView.builder(
+//               scrollDirection: Axis.horizontal,
+//               itemCount: itemCount,
+//               itemBuilder: itemBuilder),
+//         ),
+//       ],
+//     );

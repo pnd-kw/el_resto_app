@@ -1,7 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:retaste_app/bloc/restaurant_bloc.dart';
-import 'package:retaste_app/widget/restaurant_list_item.dart';
+import 'package:retaste_app/utils/layout/default_layout.dart';
+import 'package:retaste_app/widget/restaurant_list_screen_widgets/restaurant_list_item.dart';
 import 'package:flutter/material.dart';
 
 class RestaurantListScreen extends StatefulWidget {
@@ -23,14 +24,16 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    final defaultSize =
+        DefaultSize(screenWidth: screenWidth, screenHeight: screenHeight);
 
-    final mobileCircularProgressIndicatorHeight = screenHeight / 20;
+    double circularProgressIndicatorHeight =
+        defaultSize.circularProgressIndicatorHeight!;
 
-    double circularProgressIndicatorHeight = screenHeight / 10;
-
-    if (ResponsiveBreakpoints.of(context).smallerOrEqualTo(MOBILE)) {
-      circularProgressIndicatorHeight = mobileCircularProgressIndicatorHeight;
+    if (ResponsiveBreakpoints.of(context).largerThan(MOBILE)) {
+      circularProgressIndicatorHeight = screenHeight / 10;
     }
 
     return Scaffold(

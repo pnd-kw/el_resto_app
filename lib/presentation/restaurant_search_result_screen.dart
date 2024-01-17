@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:retaste_app/bloc/cubit/cubit/restaurant_search_keywords_cubit.dart';
 import 'package:retaste_app/bloc/restaurant_bloc.dart';
-import 'package:retaste_app/widget/restaurant_search_list_item.dart';
+import 'package:retaste_app/utils/layout/default_layout.dart';
+import 'package:retaste_app/widget/restaurant_search_result_screen_widgets/restaurant_search_list_item.dart';
 
 class SearchResultScreen extends StatefulWidget {
   final String initialSearchText;
@@ -31,23 +32,27 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    final defaultSize = DefaultSize(
+      screenWidth: screenWidth,
+      screenHeight: screenHeight,
+      textFieldFlex: 1,
+      bgImgHeight: screenHeight / 5,
+      textFieldHeight: screenHeight / 15,
+    );
 
-    final mobileCircularProgressIndicatorHeight = screenHeight / 20;
-    const mobileTextFieldFlex = 1;
-    final mobileBgImageHeight = screenHeight / 5;
-    final mobileTextFieldHeight = screenHeight / 15;
+    double circularProgressIndicatorHeight =
+        defaultSize.circularProgressIndicatorHeight!;
+    int textFieldFlex = defaultSize.textFieldFlex!;
+    double bgImgHeight = defaultSize.bgImgHeight!;
+    double textFieldHeight = defaultSize.textFieldHeight!;
 
-    double circularProgressIndicatorHeight = screenHeight / 10;
-    int textFieldFlex = 4;
-    double bgImageHeight = screenHeight / 4;
-    double textFieldHeight = screenHeight / 7;
-
-    if (ResponsiveBreakpoints.of(context).smallerOrEqualTo(MOBILE)) {
-      circularProgressIndicatorHeight = mobileCircularProgressIndicatorHeight;
-      textFieldFlex = mobileTextFieldFlex;
-      bgImageHeight = mobileBgImageHeight;
-      textFieldHeight = mobileTextFieldHeight;
+    if (ResponsiveBreakpoints.of(context).largerThan(MOBILE)) {
+      circularProgressIndicatorHeight = screenHeight / 10;
+      textFieldFlex = 4;
+      bgImgHeight = screenHeight / 4;
+      textFieldHeight = screenHeight / 7;
     }
 
     final restaurantSearchKeywordsCubit =
@@ -164,7 +169,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     SizedBox(
-                                      height: bgImageHeight,
+                                      height: bgImgHeight,
                                       child: Image.asset(
                                         'assets/images/search-placeholder.png',
                                         fit: BoxFit.cover,

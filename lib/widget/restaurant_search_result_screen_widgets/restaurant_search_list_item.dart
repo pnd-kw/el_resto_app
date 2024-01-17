@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:retaste_app/utils/layout/default_layout.dart';
 
 class RestaurantSearchListItem extends StatelessWidget {
   final String restaurantId;
@@ -24,26 +25,27 @@ class RestaurantSearchListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    final defaultSize = DefaultSize(
+        screenWidth: screenWidth,
+        screenHeight: screenHeight,
+        iconContainerHeight: screenHeight / 30,
+        starIconContainerWidth: screenWidth / 6,
+        pinIconContainerWidth: screenWidth / 4);
 
-    final mobileCardSizedBoxHeight = screenHeight / 5;
-    final mobileImgContainerHeight = screenHeight / 6;
-    final mobileIconContainerHeight = screenHeight / 30;
-    final mobileStarIconContainerWidth = screenWidth / 6;
-    final mobilePinIconContainerWidth = screenWidth / 4;
+    double cardSizedBoxHeight = defaultSize.cardSizedBoxHeight!;
+    double imgContainerHeight = defaultSize.imgContainerHeight!;
+    double iconContainerHeight = defaultSize.iconContainerHeight!;
+    double starIconContainerWidth = defaultSize.starIconContainerWidth!;
+    double pinIconContainerWidth = defaultSize.pinIconContainerWidth!;
 
-    double cardSizedBoxHeight = screenHeight / 2;
-    double imgContainerHeight = screenHeight / 3;
-    double iconContainerHeight = screenHeight / 10;
-    double starIconContainerWidth = screenWidth / 8;
-    double pinIconContainerWidth = screenWidth / 4;
-
-    if (ResponsiveBreakpoints.of(context).smallerOrEqualTo(MOBILE)) {
-      cardSizedBoxHeight = mobileCardSizedBoxHeight;
-      imgContainerHeight = mobileImgContainerHeight;
-      iconContainerHeight = mobileIconContainerHeight;
-      starIconContainerWidth = mobileStarIconContainerWidth;
-      pinIconContainerWidth = mobilePinIconContainerWidth;
+    if (ResponsiveBreakpoints.of(context).largerThan(MOBILE)) {
+      cardSizedBoxHeight = screenHeight / 2;
+      imgContainerHeight = screenHeight / 3;
+      iconContainerHeight = screenHeight / 10;
+      starIconContainerWidth = screenWidth / 8;
+      pinIconContainerWidth = screenWidth / 4;
     }
+
     return Card(
       elevation: 0,
       shape: RoundedRectangleBorder(

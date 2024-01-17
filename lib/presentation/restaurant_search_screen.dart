@@ -4,6 +4,8 @@ import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:retaste_app/bloc/cubit/cubit/restaurant_search_keywords_cubit.dart';
 import 'package:retaste_app/bloc/restaurant_bloc.dart';
 import 'package:retaste_app/presentation/restaurant_search_result_screen.dart';
+import 'package:retaste_app/utils/layout/default_layout.dart';
+import 'package:retaste_app/widget/restaurant_search_screen_widgets/chip_button.dart';
 
 class RestaurantSearchScreen extends StatefulWidget {
   const RestaurantSearchScreen({super.key});
@@ -27,28 +29,23 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    final defaultSize =
+        DefaultSize(screenWidth: screenWidth, screenHeight: screenHeight);
 
-    const mobileTextFieldFlex = 20;
-    const mobileSearchHistoryTitleFlex = 3;
-    const mobileChipButtonFlex = 4;
-    final mobileBgImageHeight = screenHeight / 5;
-    final mobileTextFieldHeight = screenHeight / 15;
-    final mobileChipButtonHeight = screenHeight / 20;
+    int textFieldFlex = defaultSize.textFieldFlex!;
+    int searchHistoryTitleFlex = defaultSize.searchHistoryTitleFlex!;
+    int chipButtonFlex = defaultSize.chipButtonFlex!;
+    double bgImgHeight = defaultSize.bgImgHeight!;
+    double textFieldHeight = defaultSize.textFieldHeight!;
+    double chipButtonHeight = defaultSize.chipButtonHeight!;
 
-    int textFieldFlex = 10;
-    int searchHistoryTitleFlex = 4;
-    int chipButtonFlex = 6;
-    double bgImageHeight = screenHeight / 4;
-    double textFieldHeight = screenHeight / 7;
-    double chipButtonHeight = screenHeight / 15;
-
-    if (ResponsiveBreakpoints.of(context).smallerOrEqualTo(MOBILE)) {
-      textFieldFlex = mobileTextFieldFlex;
-      searchHistoryTitleFlex = mobileSearchHistoryTitleFlex;
-      chipButtonFlex = mobileChipButtonFlex;
-      bgImageHeight = mobileBgImageHeight;
-      textFieldHeight = mobileTextFieldHeight;
-      chipButtonHeight = mobileChipButtonHeight;
+    if (ResponsiveBreakpoints.of(context).largerThan(MOBILE)) {
+      textFieldFlex = 10;
+      searchHistoryTitleFlex = 4;
+      chipButtonFlex = 6;
+      bgImgHeight = screenHeight / 4;
+      textFieldHeight = screenHeight / 7;
+      chipButtonHeight = screenHeight / 15;
     }
 
     final textSearchController = TextEditingController();
@@ -77,7 +74,7 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
           ),
           Center(
             child: SizedBox(
-              height: bgImageHeight,
+              height: bgImgHeight,
               child: Image.asset('assets/images/search-placeholder.png'),
             ),
           ),
@@ -194,11 +191,14 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
                               state.searchKeywords.take(6).toList();
 
                           for (String keyword in displayedKeywords) {
-                            chipButtons.add(buildChipButton(
-                                screenWidth / 4, chipButtonHeight, () {
-                              restaurantSearchKeywordsCubit
-                                  .navigatorAction(keyword);
-                            }, keyword, context));
+                            chipButtons.add(ChipButton(
+                                width: screenWidth / 4,
+                                height: chipButtonHeight,
+                                onTap: () {
+                                  restaurantSearchKeywordsCubit
+                                      .navigatorAction(keyword);
+                                },
+                                keyword: keyword));
                           }
 
                           return chipButtons.isNotEmpty
@@ -238,30 +238,30 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
   }
 }
 
-Widget buildChipButton(double width, double height, void Function()? onTap,
-        String keyword, BuildContext context) =>
-    SizedBox(
-      width: width,
-      height: height,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primary,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Center(
-            child: Text(
-              keyword,
-              style: Theme.of(context)
-                  .textTheme
-                  .labelSmall!
-                  .copyWith(color: Theme.of(context).colorScheme.background),
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        ),
-      ),
-    );
+// Widget buildChipButton(double width, double height, void Function()? onTap,
+//         String keyword, BuildContext context) =>
+//     SizedBox(
+//       width: width,
+//       height: height,
+//       child: InkWell(
+//         onTap: onTap,
+//         borderRadius: BorderRadius.circular(20),
+//         child: Container(
+//           decoration: BoxDecoration(
+//             color: Theme.of(context).colorScheme.primary,
+//             borderRadius: BorderRadius.circular(20),
+//           ),
+//           child: Center(
+//             child: Text(
+//               keyword,
+//               style: Theme.of(context)
+//                   .textTheme
+//                   .labelSmall!
+//                   .copyWith(color: Theme.of(context).colorScheme.background),
+//               textAlign: TextAlign.center,
+//               overflow: TextOverflow.ellipsis,
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
