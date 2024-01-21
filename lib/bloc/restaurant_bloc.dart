@@ -31,6 +31,9 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
 
       emit(RestaurantLoaded(restaurantData));
     } catch (e) {
+      if (e.toString() == 'No internet connection') {
+        emit(const RestaurantError('No internet connection'));
+      }
       emit(const RestaurantError('Failed to load restaurants'));
     }
   }
@@ -49,6 +52,9 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
         emit(RestaurantByQueryLoaded(restaurantData));
       }
     } catch (e) {
+      if (e.toString() == 'No internet connection') {
+        emit(const RestaurantError('No internet connection'));
+      }
       emit(const RestaurantByQueryError('Failed to search restaurants'));
     }
   }
@@ -63,6 +69,9 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
 
       emit(RestaurantDetailLoaded(restaurantDetail: restaurantDetail));
     } catch (e) {
+      if (e.toString() == 'No internet connection') {
+        emit(const RestaurantError('No internet connection'));
+      }
       emit(const RestaurantDetailError('Failed to load restaurant detail'));
     }
   }

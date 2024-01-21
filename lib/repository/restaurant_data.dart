@@ -1,18 +1,15 @@
+import 'dart:async';
+
 import 'api.dart';
 import 'package:dio/dio.dart';
 import 'package:retaste_app/model/restaurant_detail.dart';
 import 'package:retaste_app/model/restaurant.dart';
 
 class RestaurantData {
-  // final baseUrl =
-
-  // final getRestaurant = '/list';
-  // final getRestaurantDetail = '/detail/';
-  // final searchRestaurant = '/search?q=';
+  var dio = Dio();
 
   Future<List<Restaurant>> fetchRestaurantData() async {
     try {
-      var dio = Dio();
       final response = await dio.get('$baseUrl$getRestaurant');
 
       if (response.statusCode == 200) {
@@ -28,7 +25,6 @@ class RestaurantData {
 
   Future<List<Restaurant>> searchRestaurantData(String query) async {
     try {
-      var dio = Dio();
       final response = await dio.get('$baseUrl$searchRestaurant$query');
 
       if (response.statusCode == 200) {
@@ -44,7 +40,6 @@ class RestaurantData {
 
   Future<RestaurantDetail> fetchRestaurantDetail(String id) async {
     try {
-      var dio = Dio();
       final response = await dio.get('$baseUrl$getRestaurantDetail$id');
 
       if (response.statusCode == 200) {

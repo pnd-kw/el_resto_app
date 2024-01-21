@@ -111,10 +111,6 @@ class RestaurantListItem extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 25, top: 25, right: 15, bottom: 15),
-                          // child: buildTextBox(
-                          //   height: bgTextBoxHeight,
-                          //   color: Colors.white,
-                          // ),
                           child: TextBox(
                               height: bgTextBoxHeight, color: Colors.white),
                         ),
@@ -278,18 +274,3 @@ class RestaurantListItem extends StatelessWidget {
     );
   }
 }
-
-// Widget buildTextBox(
-//         {required double height, required Color color, Widget? child}) =>
-//     Container(
-//       height: height,
-//       decoration: BoxDecoration(
-//         color: color,
-//         borderRadius: const BorderRadius.only(
-//           bottomLeft: Radius.circular(20),
-//           bottomRight: Radius.circular(20),
-//         ),
-//         border: Border.all(width: 1.0),
-//       ),
-//       child: child,
-//     );

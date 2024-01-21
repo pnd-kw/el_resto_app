@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:retaste_app/bloc/cubit/cubit/check_connection_cubit.dart';
 import 'package:retaste_app/bloc/cubit/cubit/restaurant_search_keywords_cubit.dart';
 import 'package:retaste_app/bloc/restaurant_bloc.dart';
 
@@ -17,6 +18,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   final sharedPreferences = await SharedPreferences.getInstance();
+  final CheckConnectionCubit checkConnectionCubit = CheckConnectionCubit();
   final RestaurantData restaurantData = RestaurantData();
   final RestaurantBloc restaurantBloc = RestaurantBloc(restaurantData);
   final RestaurantSearchKeywordsData restaurantSearchKeywordsData =
@@ -26,6 +28,7 @@ void main() async {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(RetasteApp(
+      checkConnectionCubit: checkConnectionCubit,
       restaurantBloc: restaurantBloc,
       restaurantSearchKeywordsCubit: restaurantSearchKeywordsCubit,
     ));

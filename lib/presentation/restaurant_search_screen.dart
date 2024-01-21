@@ -221,7 +221,16 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
                           return Center(
                             child: SizedBox(
                               height: screenHeight / 20,
-                              child: const Text('Unknown state'),
+                              child: Text(
+                                'Unknown state',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onBackground),
+                              ),
                             ),
                           );
                         }
@@ -237,31 +246,3 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
     );
   }
 }
-
-// Widget buildChipButton(double width, double height, void Function()? onTap,
-//         String keyword, BuildContext context) =>
-//     SizedBox(
-//       width: width,
-//       height: height,
-//       child: InkWell(
-//         onTap: onTap,
-//         borderRadius: BorderRadius.circular(20),
-//         child: Container(
-//           decoration: BoxDecoration(
-//             color: Theme.of(context).colorScheme.primary,
-//             borderRadius: BorderRadius.circular(20),
-//           ),
-//           child: Center(
-//             child: Text(
-//               keyword,
-//               style: Theme.of(context)
-//                   .textTheme
-//                   .labelSmall!
-//                   .copyWith(color: Theme.of(context).colorScheme.background),
-//               textAlign: TextAlign.center,
-//               overflow: TextOverflow.ellipsis,
-//             ),
-//           ),
-//         ),
-//       ),
-//     );

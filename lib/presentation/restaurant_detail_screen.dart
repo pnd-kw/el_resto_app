@@ -29,7 +29,8 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
       });
 
       _restaurantBloc = BlocProvider.of<RestaurantBloc>(context);
-      _restaurantBloc.add(FetchRestaurantDetail(id: id));
+
+      _restaurantBloc.add(FetchRestaurantDetail(id: restaurantId));
     }
   }
 
@@ -180,8 +181,14 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
               child: Text(state.errorMessage),
             );
           } else {
-            return const Center(
-              child: Text('Unknown State'),
+            return Center(
+              child: Center(
+                child: Text(
+                  'Unknown state',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground),
+                ),
+              ),
             );
           }
         },
@@ -189,31 +196,3 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
     );
   }
 }
-
-// Widget buildMenu(BuildContext context, String title, int itemCount,
-//         Widget Function(BuildContext, int) itemBuilder) =>
-//     Column(
-//       children: [
-//         Padding(
-//           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-//           child: SizedBox(
-//             width: double.infinity,
-//             child: Text(
-//               title,
-//               style: Theme.of(context)
-//                   .textTheme
-//                   .titleLarge!
-//                   .copyWith(color: Theme.of(context).colorScheme.onBackground),
-//             ),
-//           ),
-//         ),
-//         SizedBox(
-//           width: double.infinity,
-//           height: 200,
-//           child: ListView.builder(
-//               scrollDirection: Axis.horizontal,
-//               itemCount: itemCount,
-//               itemBuilder: itemBuilder),
-//         ),
-//       ],
-//     );
