@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:retaste_app/model/restaurant_detail.dart';
 import 'package:retaste_app/model/restaurant.dart';
+import 'package:retaste_app/repository/api.dart';
 import 'package:retaste_app/repository/restaurant_data.dart';
 
 part 'restaurant_event.dart';
@@ -27,7 +28,7 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
       emit(RestaurantLoading());
 
       final List<Restaurant> restaurantData =
-          await _restaurantData.fetchRestaurantData();
+          await _restaurantData.fetchRestaurantData(baseUrl, getRestaurant);
 
       emit(RestaurantLoaded(restaurantData));
     } catch (e) {
@@ -43,8 +44,8 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
     try {
       emit(RestaurantByQueryLoading());
 
-      final List<Restaurant> restaurantData =
-          await _restaurantData.searchRestaurantData(query);
+      final List<Restaurant> restaurantData = await _restaurantData
+          .searchRestaurantData(baseUrl, searchRestaurant, query);
 
       if (restaurantData.isEmpty) {
         emit(RestaurantByQueryEmpty());
@@ -64,8 +65,8 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
     try {
       emit(RestaurantDetailLoading());
 
-      final RestaurantDetail restaurantDetail =
-          await _restaurantData.fetchRestaurantDetail(id);
+      final RestaurantDetail restaurantDetail = await _restaurantData
+          .fetchRestaurantDetail(baseUrl, getRestaurantDetail, id);
 
       emit(RestaurantDetailLoaded(restaurantDetail: restaurantDetail));
     } catch (e) {
