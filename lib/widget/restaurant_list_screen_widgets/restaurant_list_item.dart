@@ -243,7 +243,7 @@ class RestaurantListItem extends StatelessWidget {
                   width: screenWidth / 2,
                   height: titleHeight,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
+                    color: Theme.of(context).colorScheme.primary,
                     borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(40),
                       bottomRight: Radius.circular(40),
@@ -260,7 +260,7 @@ class RestaurantListItem extends StatelessWidget {
                             .headlineLarge!
                             .copyWith(
                                 color:
-                                    Theme.of(context).colorScheme.onBackground),
+                                    Theme.of(context).colorScheme.background),
                         textAlign: TextAlign.center,
                       ),
                     ),

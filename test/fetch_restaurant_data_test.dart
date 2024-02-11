@@ -11,7 +11,7 @@ class MockDio extends Mock implements Dio {}
 
 @GenerateMocks([MockDio])
 void main() {
-  test('Fetch Restaurant Data By Id - JSON Parsing Test', () async {
+  test('Should fetch restaurant data by id - JSON Parsing Test', () async {
     // Arrange
     const id = '1';
     const baseUrl = 'https://example.com';

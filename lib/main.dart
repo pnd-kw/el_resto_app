@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:retaste_app/presentation/home_page_screen.dart';
 import 'package:retaste_app/utils/style/theme.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -8,7 +9,7 @@ import 'package:retaste_app/bloc/cubit/cubit/restaurant_search_keywords_cubit.da
 import 'package:retaste_app/bloc/restaurant_bloc.dart';
 
 import 'package:retaste_app/presentation/restaurant_detail_screen.dart';
-import 'package:retaste_app/presentation/restaurant_list_screen.dart';
+// import 'package:retaste_app/presentation/restaurant_list_screen.dart';
 import 'package:retaste_app/presentation/restaurant_search_screen.dart';
 
 import 'package:retaste_app/repository/restaurant_data.dart';
@@ -72,7 +73,8 @@ class RetasteApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => const RestaurantListScreen(),
+          '/': (context) => const HomePageScreen(),
+          // '/': (context) => const RestaurantListScreen(),
           '/restaurant-detail-screen': (context) =>
               const RestaurantDetailScreen(),
           '/restaurant-search-screen': (context) =>
