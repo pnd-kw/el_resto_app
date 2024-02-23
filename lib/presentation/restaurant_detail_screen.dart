@@ -1,5 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retaste_app/bloc/cubit/cubit/favorite_restaurant_cubit.dart';
 import 'package:retaste_app/bloc/restaurant_bloc.dart';
+import 'package:retaste_app/repository/local/restaurant_database.dart';
 import 'package:retaste_app/utils/layout/default_layout.dart';
 import 'package:retaste_app/widget/restaurant_detail_screen_widgets/customer_review_item.dart';
 import 'package:retaste_app/widget/restaurant_detail_screen_widgets/menu.dart';
@@ -32,6 +34,16 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
 
       _restaurantBloc.add(FetchRestaurantDetail(id: restaurantId));
     }
+  }
+
+  Future<void> toggleFavorite() async {
+    bool isCurrentlyFavorite =
+        await RestaurantDatabase().getFavoriteStatus(restaurantId);
+
+    bool newFavoriteStatus = !isCurrentlyFavorite;
+
+    await RestaurantDatabase()
+        .toggleFavoriteStatus(restaurantId, newFavoriteStatus);
   }
 
   @override
@@ -95,6 +107,12 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                         ),
                       ),
                     ),
+                    // actions: [
+                    //   IconButton(
+                    //     onPressed: () {},
+                    //     icon: const Icon(Icons.favorite_outline),
+                    //   ),
+                    // ],
                     expandedHeight: expandedHeight,
                     pinned: true,
                     flexibleSpace: FlexibleSpaceBar(
@@ -192,6 +210,26 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
             );
           }
         },
+      ),
+      floatingActionButton:
+          BlocListener<FavoriteRestaurantCubit, FavoriteRestaurantState>(
+        listener: (context, state) {
+          if (state is FavoriteRestaurantActionState) {}
+        },
+        child: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Theme.of(context).colorScheme.secondary,
+          foregroundColor: Colors.white,
+          shape: const CircleBorder(),
+          child: BlocBuilder<FavoriteRestaurantCubit, FavoriteRestaurantState>(
+            builder: (context, state) {
+              return Icon(
+                  state is FavoriteRestaurantActionState && state.isFavorite
+                      ? Icons.favorite
+                      : Icons.favorite_border);
+            },
+          ),
+        ),
       ),
     );
   }

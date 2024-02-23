@@ -5,6 +5,7 @@ class Restaurant {
   String pictureId;
   String city;
   double rating;
+  bool? isFavorite;
 
   Restaurant({
     required this.id,
@@ -13,6 +14,7 @@ class Restaurant {
     required this.pictureId,
     required this.city,
     required this.rating,
+    this.isFavorite,
   });
 
   factory Restaurant.fromJson(Map<String, dynamic> json) => Restaurant(

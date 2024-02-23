@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:retaste_app/bloc/cubit/cubit/favorite_restaurant_cubit.dart';
 import 'package:retaste_app/presentation/home_page_screen.dart';
+import 'package:retaste_app/repository/local/restaurant_database.dart';
 import 'package:retaste_app/utils/style/theme.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -25,27 +27,34 @@ void main() async {
   final CheckConnectionCubit checkConnectionCubit = CheckConnectionCubit();
   final RestaurantData restaurantData = RestaurantData();
   final RestaurantBloc restaurantBloc = RestaurantBloc(restaurantData);
+  final RestaurantDatabase restaurantDatabase = RestaurantDatabase();
   final RestaurantSearchKeywordsData restaurantSearchKeywordsData =
       RestaurantSearchKeywordsData(prefs: sharedPreferences);
   final RestaurantSearchKeywordsCubit restaurantSearchKeywordsCubit =
       RestaurantSearchKeywordsCubit(restaurantSearchKeywordsData);
+  final FavoriteRestaurantCubit favoriteRestaurantCubit =
+      FavoriteRestaurantCubit(restaurantDatabase);
 
   runApp(RetasteApp(
-      checkConnectionCubit: checkConnectionCubit,
-      restaurantBloc: restaurantBloc,
-      restaurantSearchKeywordsCubit: restaurantSearchKeywordsCubit));
+    checkConnectionCubit: checkConnectionCubit,
+    restaurantBloc: restaurantBloc,
+    restaurantSearchKeywordsCubit: restaurantSearchKeywordsCubit,
+    favoriteRestaurantCubit: favoriteRestaurantCubit,
+  ));
 }
 
 class RetasteApp extends StatelessWidget {
   final CheckConnectionCubit checkConnectionCubit;
   final RestaurantBloc restaurantBloc;
   final RestaurantSearchKeywordsCubit restaurantSearchKeywordsCubit;
+  final FavoriteRestaurantCubit favoriteRestaurantCubit;
 
   const RetasteApp(
       {super.key,
       required this.checkConnectionCubit,
       required this.restaurantBloc,
-      required this.restaurantSearchKeywordsCubit});
+      required this.restaurantSearchKeywordsCubit,
+      required this.favoriteRestaurantCubit});
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +66,9 @@ class RetasteApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => restaurantSearchKeywordsCubit,
+        ),
+        BlocProvider(
+          create: (context) => favoriteRestaurantCubit,
         ),
       ],
       child: MaterialApp(
