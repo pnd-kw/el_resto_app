@@ -9,6 +9,10 @@ class FavoriteRestaurantState extends Equatable {
 
 final class FavoriteRestaurantInitial extends FavoriteRestaurantState {}
 
+// final class FavoriteRestaurantLoading extends FavoriteRestaurantState {}
+
+final class FavoriteRestaurantEmpty extends FavoriteRestaurantState {}
+
 final class FavoriteRestaurantLoaded extends FavoriteRestaurantState {
   final List<Restaurant> restaurants;
 
@@ -27,12 +31,23 @@ final class FavoriteRestaurantError extends FavoriteRestaurantState {
   List<Object> get props => [errorMessage];
 }
 
-final class FavoriteRestaurantActionState extends FavoriteRestaurantState {
+abstract class FavoriteRestaurantActionState extends FavoriteRestaurantState {}
+
+final class ToggleFavoriteActionState extends FavoriteRestaurantActionState {
   final String id;
   final bool isFavorite;
 
-  const FavoriteRestaurantActionState(this.id, this.isFavorite);
+  ToggleFavoriteActionState(this.id, this.isFavorite);
 
   @override
   List<Object> get props => [id, isFavorite];
+}
+
+final class NavigatorActionState extends FavoriteRestaurantActionState {
+  final String id;
+
+  NavigatorActionState(this.id);
+
+  @override
+  List<Object> get props => [id];
 }

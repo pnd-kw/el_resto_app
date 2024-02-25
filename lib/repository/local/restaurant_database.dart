@@ -23,6 +23,8 @@ class RestaurantDatabase {
       onCreate: (Database db, int version) async {
         await db.execute(
             ''' CREATE TABLE $restaurantTable(id TEXT PRIMARY KEY, name TEXT, description TEXT, pictureId TEXT, city TEXT, rating REAL, isFavorite INTEGER DEFAULT 0)''');
+
+        print('Database and table created successfully.');
       },
     );
   }
@@ -41,45 +43,29 @@ class RestaurantDatabase {
       whereArgs: [1],
     );
 
+    print('Favorite Restaurants: $maps');
+
     return List.generate(maps.length, (index) {
       return Restaurant.fromJson(maps[index]);
     });
   }
 
-  // Future<List<Restaurant>> getRestaurants() async {
-  //   final Database db = await database;
-  //   final List<Map<String, dynamic>> maps = await db.query(restaurantTable);
-
-  //   return List.generate(maps.length, (index) {
-  //     return Restaurant(
-  //       id: maps[index]['id'],
-  //       name: maps[index]['name'],
-  //       description: maps[index]['description'],
-  //       pictureId: maps[index]['pictureId'],
-  //       city: maps[index]['city'],
-  //       rating: maps[index]['rating'],
-  //       isFavorite: maps[index]['isFavorite'] == 1,
-  //     );
-  //   });
-  // }
-
-  // Future<void> updateRestaurant(Restaurant restaurant) async {
-  //   final Database db = await database;
-  //   await db.update(
-  //     restaurantTable,
-  //     restaurant.toJson(),
-  //     where: 'id = ?',
-  //     whereArgs: [restaurant.id],
-  //   );
-  // }
-
-  Future<void> toggleFavoriteStatus(String id, bool isFavorite) async {
+  Future<void> toggleFavoriteStatus(String id, String name, String description,
+      String pictureId, String city, double rating, bool isFavorite) async {
     final Database db = await database;
 
     if (isFavorite) {
       await db.insert(
         restaurantTable,
-        {'id': id, 'isFavorite': 1},
+        {
+          'id': id,
+          'name': name,
+          'description': description,
+          'pictureId': pictureId,
+          'city': city,
+          'rating': rating,
+          'isFavorite': 1
+        },
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
     } else {
@@ -102,13 +88,4 @@ class RestaurantDatabase {
 
     return result.isNotEmpty ? result[0]['isFavorite'] == 1 : false;
   }
-
-  // Future<void> deleteRestaurant(String id) async {
-  //   final Database db = await database;
-  //   await db.delete(
-  //     restaurantTable,
-  //     where: 'id = ?',
-  //     whereArgs: [id],
-  //   );
-  // }
 }

@@ -226,17 +226,15 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                           );
                         } else {
                           return Center(
-                            child: Center(
-                              child: Text(
-                                'Unknown state',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onBackground),
-                              ),
+                            child: Text(
+                              'Unknown state',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground),
                             ),
                           );
                         }
