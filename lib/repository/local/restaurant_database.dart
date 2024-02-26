@@ -23,8 +23,6 @@ class RestaurantDatabase {
       onCreate: (Database db, int version) async {
         await db.execute(
             ''' CREATE TABLE $restaurantTable(id TEXT PRIMARY KEY, name TEXT, description TEXT, pictureId TEXT, city TEXT, rating REAL, isFavorite INTEGER DEFAULT 0)''');
-
-        print('Database and table created successfully.');
       },
     );
   }
@@ -42,8 +40,6 @@ class RestaurantDatabase {
       where: 'isFavorite = ?',
       whereArgs: [1],
     );
-
-    print('Favorite Restaurants: $maps');
 
     return List.generate(maps.length, (index) {
       return Restaurant.fromJson(maps[index]);

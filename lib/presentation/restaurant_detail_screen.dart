@@ -64,9 +64,6 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
       _isFavorite = newFavoriteStatus;
       _buttonPressed = true;
     });
-
-    // final favoriteCubit = BlocProvider.of<FavoriteRestaurantCubit>(context);
-    // favoriteCubit.refreshFavoriteRestaurants();
   }
 
   @override

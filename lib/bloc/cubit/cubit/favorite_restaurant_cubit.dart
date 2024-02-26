@@ -16,8 +16,6 @@ class FavoriteRestaurantCubit extends Cubit<FavoriteRestaurantState> {
       final List<Restaurant> favoriteRestaurants =
           await _restaurantDatabase.getFavoriteRestaurants();
 
-      print('Favorite Restaurants: $favoriteRestaurants');
-
       if (favoriteRestaurants.isNotEmpty) {
         emit(FavoriteRestaurantLoaded(favoriteRestaurants));
       } else {
@@ -35,7 +33,6 @@ class FavoriteRestaurantCubit extends Cubit<FavoriteRestaurantState> {
       await _restaurantDatabase.toggleFavoriteStatus(
           id, name, description, pictureId, city, rating, isFavorite);
       emit(ToggleFavoriteActionState(id, isFavorite));
-      // refreshFavoriteRestaurants();
     } catch (e) {
       emit(const FavoriteRestaurantError(
           'Failed to add restaurant as favorite.'));
@@ -45,8 +42,4 @@ class FavoriteRestaurantCubit extends Cubit<FavoriteRestaurantState> {
   void navigateToRestaurantDetail(String restaurantId) {
     emit(NavigatorActionState(restaurantId));
   }
-
-  // void refreshFavoriteRestaurants() {
-  //   loadFavoriteRestaurants();
-  // }
 }

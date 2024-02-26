@@ -2,6 +2,7 @@ import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_not
 import 'package:flutter/material.dart';
 import 'package:retaste_app/presentation/restaurant_favorite_screen.dart';
 import 'package:retaste_app/presentation/restaurant_list_screen.dart';
+import 'package:retaste_app/presentation/restaurant_setting_screen.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({super.key});
@@ -26,6 +27,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
   final List<Widget> bottomBarPages = [
     const RestaurantListScreen(),
     const RestaurantFavoriteScreen(),
+    const RestaurantSettingScreen(),
   ];
 
   @override
@@ -70,6 +72,16 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   ),
                   itemLabel: 'Favorite Page',
                 ),
+                BottomBarItem(
+                    inActiveItem: Icon(
+                      Icons.settings,
+                      color: Colors.grey,
+                    ),
+                    activeItem: Icon(
+                      Icons.settings,
+                      color: Colors.white,
+                    ),
+                    itemLabel: 'Settings Page'),
               ],
               onTap: (index) {
                 _pageController.jumpToPage(index);

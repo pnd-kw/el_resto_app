@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:retaste_app/bloc/cubit/cubit/favorite_restaurant_cubit.dart';
 import 'package:retaste_app/presentation/home_page_screen.dart';
 import 'package:retaste_app/repository/local/restaurant_database.dart';
+import 'package:retaste_app/services/notification_service.dart';
 import 'package:retaste_app/utils/style/theme.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -21,6 +22,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  NotificationService().initNotification();
 
   final sharedPreferences = await SharedPreferences.getInstance();
 
