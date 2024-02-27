@@ -1,3 +1,4 @@
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:retaste_app/bloc/cubit/cubit/favorite_restaurant_cubit.dart';
 import 'package:retaste_app/presentation/home_page_screen.dart';
@@ -24,6 +25,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   NotificationService().initNotification();
+
+  await AndroidAlarmManager.initialize();
 
   final sharedPreferences = await SharedPreferences.getInstance();
 
