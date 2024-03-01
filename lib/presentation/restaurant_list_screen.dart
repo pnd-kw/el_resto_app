@@ -5,7 +5,7 @@ import 'package:retaste_app/bloc/restaurant_bloc.dart';
 import 'package:retaste_app/utils/layout/default_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:retaste_app/widget/check_connection_alert.dart';
-import 'package:retaste_app/widget/restaurant_list_screen_widgets/restaurant_list_item.dart';
+import 'package:retaste_app/widget/restaurant_list_item_primary.dart';
 
 class RestaurantListScreen extends StatefulWidget {
   const RestaurantListScreen({super.key});
@@ -130,7 +130,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                                     RestaurantNavigatorActionEvent(
                                         restaurantId));
                               },
-                              child: RestaurantListItem(
+                              child: RestaurantListItemPrimary(
                                 restaurantId: state.restaurants[index].id,
                                 name: state.restaurants[index].name,
                                 description:

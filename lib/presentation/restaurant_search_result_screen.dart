@@ -5,7 +5,7 @@ import 'package:retaste_app/bloc/cubit/cubit/check_connection_cubit.dart';
 import 'package:retaste_app/bloc/cubit/cubit/restaurant_search_keywords_cubit.dart';
 import 'package:retaste_app/bloc/restaurant_bloc.dart';
 import 'package:retaste_app/utils/layout/default_layout.dart';
-import 'package:retaste_app/widget/restaurant_search_result_screen_widgets/restaurant_search_list_item.dart';
+import 'package:retaste_app/widget/restaurant_list_item_secondary.dart';
 
 class SearchResultScreen extends StatefulWidget {
   final String initialSearchText;
@@ -210,7 +210,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                         RestaurantSearchNavigatorActionEvent(
                                             restaurantId));
                                   },
-                                  child: RestaurantSearchListItem(
+                                  child: RestaurantListItemSecondary(
                                       restaurantId: state.restaurants[index].id,
                                       name: state.restaurants[index].name,
                                       description:

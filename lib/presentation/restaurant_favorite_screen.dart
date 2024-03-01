@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retaste_app/bloc/cubit/cubit/favorite_restaurant_cubit.dart';
 import 'package:retaste_app/utils/layout/default_layout.dart';
-import 'package:retaste_app/widget/restaurant_search_result_screen_widgets/restaurant_search_list_item.dart';
+import 'package:retaste_app/widget/restaurant_list_item_secondary.dart';
 
 class RestaurantFavoriteScreen extends StatefulWidget {
   const RestaurantFavoriteScreen({super.key});
@@ -121,7 +121,7 @@ class _RestaurantFavoriteScreenState extends State<RestaurantFavoriteScreen> {
                                 .read<FavoriteRestaurantCubit>()
                                 .navigateToRestaurantDetail(restaurantId);
                           },
-                          child: RestaurantSearchListItem(
+                          child: RestaurantListItemSecondary(
                             restaurantId: state.restaurants[index].id,
                             name: state.restaurants[index].name,
                             description: state.restaurants[index].description,

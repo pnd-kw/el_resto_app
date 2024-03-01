@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:retaste_app/utils/layout/default_layout.dart';
 
-class RestaurantSearchListItem extends StatelessWidget {
+class RestaurantListItemSecondary extends StatelessWidget {
   final String restaurantId;
   final String name;
   final String description;
@@ -11,7 +11,7 @@ class RestaurantSearchListItem extends StatelessWidget {
   final String city;
   final double rating;
 
-  const RestaurantSearchListItem({
+  const RestaurantListItemSecondary({
     super.key,
     required this.restaurantId,
     required this.name,

@@ -4,7 +4,7 @@ import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:retaste_app/utils/layout/default_layout.dart';
 import 'package:retaste_app/widget/restaurant_list_screen_widgets/textbox.dart';
 
-class RestaurantListItem extends StatelessWidget {
+class RestaurantListItemPrimary extends StatelessWidget {
   final String restaurantId;
   final String name;
   final String description;
@@ -12,7 +12,7 @@ class RestaurantListItem extends StatelessWidget {
   final String city;
   final double rating;
 
-  const RestaurantListItem({
+  const RestaurantListItemPrimary({
     super.key,
     required this.restaurantId,
     required this.name,
